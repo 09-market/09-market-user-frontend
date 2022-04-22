@@ -3,13 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
-import { isLogined } from 'utils/isLogined';
-
-import ProfileModal from 'components/ProfileModal';
 
 export default function Header() {
-  const [profileClicked, setProfileClicked] = useState(false);
-  const [userId, setUserId] = useState();
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
@@ -29,33 +24,13 @@ export default function Header() {
     };
   }, []);
 
-  const ProfileItem = () => {
-    if (isLogined()) {
-      return (
-        <LoginedProfile
-          type="button"
-          onClick={() => setProfileClicked(!profileClicked)}
-        >
-          {profileClicked && (
-            <ProfileModal
-              setProfileClicked={setProfileClicked}
-              userId={userId}
-            />
-          )}
-        </LoginedProfile>
-      );
-    } else {
-      return <Link to="/signin">로그인</Link>;
-    }
-  };
-
   return (
     <HeaderWrap className={hide && 'header-sticky'}>
       <Logo onClick={() => (document.documentElement.scrollTop = 0)}>
         공구
         <span className="logo-color">마켓</span>
       </Logo>
-      <ProfileItem />
+      <Link to="/search" title="검색 버튼" className="btn-search" />
     </HeaderWrap>
   );
 }
@@ -77,6 +52,13 @@ const HeaderWrap = styled.header`
   &.header-sticky {
     transform: translateY(-100px);
   }
+
+  .btn-search {
+    width: 25px;
+    height: 25px;
+    background-image: url('/images/search.png');
+    background-size: cover;
+  }
 `;
 
 const Logo = styled.h1`
@@ -86,12 +68,4 @@ const Logo = styled.h1`
   .logo-color {
     color: ${PALLETS.SKY_BLUE};
   }
-`;
-
-const LoginedProfile = styled.div`
-  width: 35px;
-  height: 35px;
-  background-image: url('/images/profile.png');
-  background-size: cover;
-  border-radius: 50%;
 `;
