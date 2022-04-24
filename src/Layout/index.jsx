@@ -19,4 +19,5 @@ export default function Layout() {
 
 const Main = styled.main`
   margin-top: 70px;
+  margin-bottom: 100px;
 `;

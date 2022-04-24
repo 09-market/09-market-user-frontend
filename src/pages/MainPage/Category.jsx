@@ -1,17 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { PALLETS } from 'utils/constants';
 
-export default function Category({ category, setCategory }) {
+export default function Category({ currentCategory, setCurrentCategory }) {
+  const categoryData = ['전체', '화장품', '의류', '식품'];
+
   const handleCategory = (e) => {
-    setCategory(e.target.innerText);
+    setCurrentCategory(e.target.innerText);
   };
 
   return (
     <CategoryContainer>
-      <CategoryItem onClick={handleCategory}>전체</CategoryItem>
-      <CategoryItem onClick={handleCategory}>화장품</CategoryItem>
-      <CategoryItem onClick={handleCategory}>의류</CategoryItem>
-      <CategoryItem onClick={handleCategory}>식품</CategoryItem>
+      {categoryData.map((category) => {
+        if (category === currentCategory) {
+          return (
+            <ClickedCategoryItem key={category}>{category}</ClickedCategoryItem>
+          );
+        } else {
+          return (
+            <CategoryItem onClick={handleCategory} key={category}>
+              {category}
+            </CategoryItem>
+          );
+        }
+      })}
     </CategoryContainer>
   );
 }
@@ -24,5 +36,11 @@ const CategoryContainer = styled.ul`
 `;
 
 const CategoryItem = styled.li`
+  cursor: pointer;
   margin-left: 3vw;
+`;
+
+const ClickedCategoryItem = styled(CategoryItem)`
+  font-family: 'GmarketSansBold';
+  color: ${PALLETS.PURPLE};
 `;

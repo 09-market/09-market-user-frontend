@@ -34,9 +34,9 @@ export default function Header() {
     <HeaderWrap className={hide && 'header-sticky'}>
       <Logo onClick={() => handleLinkLogo()}>
         공구
-        <span className="logo-color">마켓</span>
+        <ColorLogo>마켓</ColorLogo>
       </Logo>
-      <Link to="/search" title="검색 버튼" className="btn-search" />
+      <SearchButton to="/search" title="검색 버튼" />
     </HeaderWrap>
   );
 }
@@ -54,24 +54,26 @@ const HeaderWrap = styled.header`
   background-color: ${PALLETS.PURPLE};
   color: ${PALLETS.WHITE};
   transition: all 0.3s;
+  z-index: 9999;
 
   &.header-sticky {
     transform: translateY(-100px);
   }
+`;
 
-  .btn-search {
-    width: 25px;
-    height: 25px;
-    background-image: url('/images/search.png');
-    background-size: cover;
-  }
+const SearchButton = styled(Link)`
+  width: 25px;
+  height: 25px;
+  background-image: url('/images/search.png');
+  background-size: cover;
 `;
 
 const Logo = styled.h1`
   font-family: 'GmarketSansBold';
   font-size: 2rem;
+  cursor: pointer;
+`;
 
-  .logo-color {
-    color: ${PALLETS.SKY_BLUE};
-  }
+const ColorLogo = styled.span`
+  color: ${PALLETS.SKY_BLUE};
 `;

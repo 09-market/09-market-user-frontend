@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -20,14 +20,14 @@ export default function SignUpPage() {
     zipcode: 0,
   });
 
-  const handelUserData = ({ key, value }) => {
+  const handelUserData = async ({ key, value }) => {
     setUserData((prevObject) => {
       return { ...prevObject, [key]: value };
     });
   };
 
   // 회원가입 요청 부분 수정해야함
-  const submitUserData = async () => {
+  const signUp = async () => {
     try {
       const request = await axios.post();
     } catch (err) {
@@ -38,20 +38,16 @@ export default function SignUpPage() {
   if (isLogined()) {
     return <Navigate replace to="/" />;
   } else {
-    if (step === 'basic') {
-      return (
-        <>
-          <GoBackHeader headerTitle={'회원가입'} />
-          <BasicInformation setStep={setStep} handelUserData={handelUserData} />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <GoBackHeader headerTitle={'회원가입'} setStep={setStep} />
-          <PersonalInformation handelUserData={handelUserData} />
-        </>
-      );
-    }
+    return step === 'basic' ? (
+      <>
+        <GoBackHeader headerTitle={'회원가입'} />
+        <BasicInformation setStep={setStep} handelUserData={handelUserData} />
+      </>
+    ) : (
+      <>
+        <GoBackHeader headerTitle={'회원가입'} setStep={setStep} />
+        <PersonalInformation handelUserData={handelUserData} signUp={signUp} />
+      </>
+    );
   }
 }

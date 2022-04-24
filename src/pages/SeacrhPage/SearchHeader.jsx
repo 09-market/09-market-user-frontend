@@ -13,7 +13,7 @@ export default function SearchHeader() {
       <SearchButton>
         <span className="blind">검색 버튼</span>
       </SearchButton>
-      <SearchInput type="text" autofocus placeholder="검색어를 입력하세요." />
+      <SearchInput type="text" autoFocus placeholder="검색어를 입력하세요." />
       <CancelButton
         type="button"
         onClick={() => {

@@ -33,10 +33,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path="/profile/:userId" element={<ProfilePage />} />
-          <Route path="/post/detail/:postId" element={<PostDetailPage />} />
         </Route>
 
         <Route path="/post/upload" element={<PostUploadPage />} />
+        <Route path="/post/detail/:postId" element={<PostDetailPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />

@@ -4,46 +4,64 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 
-export default function PostItems({ category }) {
+export default function PostItems({ currentCategory }) {
   const navigate = useNavigate();
 
-  const postData = {
-    postId: 1,
-    postTitle: '상품명',
-    postImageUrl: '/images/example_1.jpg',
-    postLike: 100,
-    postComent: 100,
-  };
+  const postData = [
+    {
+      postId: 1,
+      postTitle: '상품명_1',
+      postImageUrl: '/images/example_1.jpg',
+      postLike: 100,
+      postComent: 100,
+    },
+    {
+      postId: 2,
+      postTitle: '상품명_2',
+      postImageUrl: '/images/example_2.jpg',
+      postLike: 200,
+      postComent: 200,
+    },
+  ];
 
   return (
-    <MainPageContainer>
-      <MainPageItem onClick={() => navigate(`/post/detail/${postData.postId}`)}>
-        <ItemImageWrap>
-          <ItemImage src={postData.postImageUrl} alt={postData.postTitle} />
-          <ItemBackground />
-        </ItemImageWrap>
-        <ItemInfo>
-          <ItemLike>
-            <span className="blind">좋아요 수</span>
-            {postData.postLike}
-          </ItemLike>
-          <ItemComment>
-            <span className="blind">댓글 수</span>
-            {postData.postComent}
-          </ItemComment>
-        </ItemInfo>
-      </MainPageItem>
-    </MainPageContainer>
+    <>
+      <h2 className="blind">{currentCategory} 카테고리 게시글</h2>
+      <PostsWrap>
+        {postData.map((post) => (
+          <PostItem
+            onClick={() => navigate(`/post/detail/${post.postId}`)}
+            key={post.postId}
+          >
+            <ItemImageWrap>
+              <ItemImage src={post.postImageUrl} alt={post.postTitle} />
+              <ItemBackground />
+            </ItemImageWrap>
+            <ItemInfo>
+              <ItemLike>
+                <span className="blind">좋아요 수</span>
+                {post.postLike}
+              </ItemLike>
+              <ItemComment>
+                <span className="blind">댓글 수</span>
+                {post.postComent}
+              </ItemComment>
+            </ItemInfo>
+          </PostItem>
+        ))}
+      </PostsWrap>
+    </>
   );
 }
 
-const MainPageContainer = styled.ul`
+const PostsWrap = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const MainPageItem = styled.li`
+const PostItem = styled.li`
+  cursor: pointer;
   position: relative;
   width: 95vw;
   margin-top: 2.5vw;
@@ -57,6 +75,10 @@ const ItemImage = styled.img`
   height: 250px;
   object-fit: cover;
   border-radius: 5px;
+
+  @media screen and (min-width: 420px) {
+    height: 500px;
+  }
 `;
 
 const ItemBackground = styled.div`

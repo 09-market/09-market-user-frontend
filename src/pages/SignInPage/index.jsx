@@ -15,16 +15,16 @@ export default function SignInPage() {
       <>
         <GoBackHeader />
         <SignInPageWrap>
-          <h1 className="blind">로그인 페이지</h1>
-          <Link to="/" className="link-home">
-            공구<span>마켓</span>
-          </Link>
+          <h1 className="blind">로그인</h1>
+          <Logo to="/">
+            공구<ColorLogo>마켓</ColorLogo>
+          </Logo>
           <Form method="post">
             <label className="blind">아이디 입력</label>
             <input type="text" required placeholder="아이디 입력" />
             <label className="blind">비밀번호 입력</label>
             <input type="password" required placeholder="비밀번호 입력" />
-            {/* <strong className="error">{res.error}</strong> */}
+            {/* <strong>{res.error}</strong> */}
             <SignInButton type="button" className="btn-login">
               로그인
             </SignInButton>
@@ -41,25 +41,26 @@ const SignInPageWrap = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
 
-  .link-home {
-    font-size: 2.5rem;
-    font-family: 'GmarketSansBold';
-    color: ${PALLETS.PURPLE};
-    animation: scale 0.3s ease-out;
+const Logo = styled(Link)`
+  font-size: 2.5rem;
+  font-family: 'GmarketSansBold';
+  color: ${PALLETS.PURPLE};
+  animation: scale 0.3s ease-out;
 
-    @keyframes scale {
-      0% {
-        transform: scale(0.5);
-      }
-      100 % {
-        transform: scale(1);
-      }
+  @keyframes scale {
+    0% {
+      transform: scale(0.5);
     }
-    span {
-      color: ${PALLETS.SKY_BLUE};
+    100 % {
+      transform: scale(1);
     }
   }
+`;
+
+const ColorLogo = styled.span`
+  color: ${PALLETS.SKY_BLUE};
 `;
 
 const Form = styled.form`

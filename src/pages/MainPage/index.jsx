@@ -4,12 +4,15 @@ import Category from './Category';
 import PostItems from './PostItems';
 
 export default function MainPage() {
-  const [category, setCategory] = useState('all');
+  const [currentCategory, setCurrentCategory] = useState('전체');
 
   return (
     <>
-      <Category category={category} setCategory={setCategory} />
-      <PostItems category={category} />
+      <Category
+        currentCategory={currentCategory}
+        setCurrentCategory={setCurrentCategory}
+      />
+      <PostItems currentCategory={currentCategory} />
     </>
   );
 }

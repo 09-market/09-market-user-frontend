@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { PALLETS } from 'utils/constants';
 
 export default function GoBackHeader({ headerTitle, setStep }) {
   const navigate = useNavigate();
@@ -28,12 +29,15 @@ const GoBackHeaderWrap = styled.header`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: ${PALLETS.WHITE};
+  z-index: 9999;
 `;
 
 const GoBackButton = styled.button`
   position: absolute;
   left: 20px;
   font-size: 1.5rem;
+  color: ${PALLETS.BLACK};
 
   &::after {
     content: '<';
