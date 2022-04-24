@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function DetailPage() {
+export default function PostDetailPage() {
   return <div>DetailPage</div>;
 }

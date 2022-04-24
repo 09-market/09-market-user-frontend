@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Category from './Category';
+import PostItems from './PostItems';
 
 export default function MainPage() {
-  return <div>MainPage</div>;
+  const [category, setCategory] = useState('all');
+
+  return (
+    <>
+      <Category category={category} setCategory={setCategory} />
+      <PostItems category={category} />
+    </>
+  );
 }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 
 export default function Header() {
+  const navigate = useNavigate();
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
@@ -24,9 +25,14 @@ export default function Header() {
     };
   }, []);
 
+  const handleLinkLogo = () => {
+    document.documentElement.scrollTop = 0;
+    navigate('/');
+  };
+
   return (
     <HeaderWrap className={hide && 'header-sticky'}>
-      <Logo onClick={() => (document.documentElement.scrollTop = 0)}>
+      <Logo onClick={() => handleLinkLogo()}>
         공구
         <span className="logo-color">마켓</span>
       </Logo>

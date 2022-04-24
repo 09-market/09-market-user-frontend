@@ -15,7 +15,7 @@ export default function SignInPage() {
       <>
         <GoBackHeader />
         <SignInPageWrap>
-          <h2 className="blind">로그인 페이지</h2>
+          <h1 className="blind">로그인 페이지</h1>
           <Link to="/" className="link-home">
             공구<span>마켓</span>
           </Link>

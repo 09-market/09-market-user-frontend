@@ -14,8 +14,8 @@ export default function Nav() {
           </Link>
         </NavItem>
         <NavItem>
-          <Link to="/category" className="link-category">
-            <span className="blind">카테고리 페이지로 이동</span>
+          <Link to="/post/upload" className="link-upload">
+            <span className="blind">게시글 업로드 페이지로 이동</span>
           </Link>
         </NavItem>
         <NavItem>
@@ -60,6 +60,10 @@ const NavItem = styled.li`
 
   .link-category {
     background-image: url('/images/category.png');
+  }
+
+  .link-upload {
+    background-image: url('/images/plus.png');
   }
 
   .link-profile {

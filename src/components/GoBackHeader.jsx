@@ -13,9 +13,8 @@ export default function GoBackHeader({ headerTitle, setStep }) {
         }}
       >
         <span className="blind">뒤로가기 버튼</span>
-        {'<'}
       </GoBackButton>
-      {headerTitle && <h2>{headerTitle}</h2>}
+      {headerTitle && <h1>{headerTitle}</h1>}
     </GoBackHeaderWrap>
   );
 }
@@ -35,4 +34,8 @@ const GoBackButton = styled.button`
   position: absolute;
   left: 20px;
   font-size: 1.5rem;
+
+  &::after {
+    content: '<';
+  }
 `;

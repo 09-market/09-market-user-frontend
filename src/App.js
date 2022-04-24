@@ -6,9 +6,9 @@ import Layout from './Layout';
 import SplashPage from 'pages/SplashPage';
 import MainPage from './pages/MainPage';
 import ProfilePage from 'pages/ProfilePage';
-import DetailPage from './pages/DetailPage';
+import PostDetailPage from './pages/PostDetailPage';
 import SearchPage from 'pages/SeacrhPage';
-import CategoryPage from 'pages/CategoryPage';
+import PostUploadPage from 'pages/PostUploadPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -33,10 +33,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path="/profile/:userId" element={<ProfilePage />} />
-          <Route path="/post/:postId" element={<DetailPage />} />
-          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/post/detail/:postId" element={<PostDetailPage />} />
         </Route>
 
+        <Route path="/post/upload" element={<PostUploadPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
