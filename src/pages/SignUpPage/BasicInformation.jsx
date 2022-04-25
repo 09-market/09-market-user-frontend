@@ -4,18 +4,24 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 
 export default function BasicInformation({ setStep, handelUserData }) {
-  const [inputId, setInputId] = useState('');
+  const [inputEmail, setInputEmail] = useState('');
   const [inputPw, setInputPw] = useState('');
   const [inputPwVerify, setInputPwVerify] = useState('');
   const [error, setError] = useState('');
   const [disabledBtn, setDisabledBtn] = useState(true);
 
+  const checkEmail =
+    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+  let emailVerify = checkEmail.test(inputEmail);
+
   useEffect(() => {
     if (
       error.length === 0 &&
-      inputId.length > 0 &&
+      inputEmail.length > 0 &&
       inputPw.length > 0 &&
       inputPwVerify.length > 0 &&
+      emailVerify &&
       inputPw === inputPwVerify
     ) {
       setError('');
@@ -23,10 +29,16 @@ export default function BasicInformation({ setStep, handelUserData }) {
     } else {
       setDisabledBtn(true);
     }
-  }, [error, inputId, inputPw, inputPwVerify]);
+  }, [error, inputEmail, emailVerify, inputPw, inputPwVerify]);
 
-  const handleInputId = (e) => {
-    setInputId(e.target.value);
+  const handleInputEmail = (e) => {
+    setInputEmail(e.target.value);
+
+    if (checkEmail.test(e.target.value)) {
+      setError('');
+    } else {
+      setError('이메일 형식이 유효하지 않습니다.');
+    }
   };
 
   const handleInputPw = (e) => {
@@ -44,7 +56,7 @@ export default function BasicInformation({ setStep, handelUserData }) {
 
   const handleNextBtn = () => {
     setStep('Personal');
-    handelUserData('id', inputId);
+    handelUserData('email', inputEmail);
     handelUserData('password', inputPw);
   };
 
@@ -52,17 +64,17 @@ export default function BasicInformation({ setStep, handelUserData }) {
     <>
       <SignUpPageWrap>
         <Form method="get">
-          <label>아이디</label>
-          <InputIdWrap className="mb-30">
+          <label>이메일</label>
+          <InputEmailWrap className="mb-30">
             <input
               type="text"
-              placeholder="아이디 입력"
+              placeholder="이메일 입력"
               required
               autoFocus
-              value={inputId}
-              onChange={handleInputId}
+              value={inputEmail}
+              onChange={handleInputEmail}
             />
-          </InputIdWrap>
+          </InputEmailWrap>
           <InputPwWrap>
             <legend className="blind">비밀번호 입력 및 확인</legend>
             <label>비밀번호</label>
@@ -80,7 +92,6 @@ export default function BasicInformation({ setStep, handelUserData }) {
               required
               value={inputPwVerify}
               onChange={handleInputPwVerify}
-              onBlur={handleInputPwVerify}
             />
           </InputPwWrap>
           <ErrorText>{error}</ErrorText>
@@ -123,13 +134,13 @@ const Form = styled.form`
   }
 `;
 
-const InputIdWrap = styled.div`
+const InputEmailWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
 `;
 
-const InputPwWrap = styled(InputIdWrap)`
+const InputPwWrap = styled(InputEmailWrap)`
   margin-bottom: 0;
 `;
 

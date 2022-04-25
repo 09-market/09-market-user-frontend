@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import { PALLETS } from 'utils/constants';
+import AddressModal from './AddressModal';
 
 export default function PersonalInformation({ handelUserData, signUp }) {
   const navigate = useNavigate();
+  const [addressClicked, setAddressClicked] = useState(false);
   const [inputName, setInputName] = useState('');
-  const [inputEmail, setInputEmail] = useState('');
-  const [inputPhone, setInputPhone] = useState('010');
+  const [inputPhone, setInputPhone] = useState('');
   const [inputAddress, setInputAddress] = useState('');
   const [inputZipcode, setInputZipcode] = useState(0);
 
@@ -19,7 +20,6 @@ export default function PersonalInformation({ handelUserData, signUp }) {
     if (
       error.length === 0 &&
       inputName.length > 0 &&
-      inputEmail.length > 0 &&
       inputPhone.length > 0 &&
       inputAddress.length > 0
     ) {
@@ -28,22 +28,10 @@ export default function PersonalInformation({ handelUserData, signUp }) {
     } else {
       setDisabledBtn(true);
     }
-  }, [error, inputName, inputEmail, inputPhone, inputAddress]);
+  }, [error, inputName, inputPhone, inputAddress]);
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
-  };
-
-  const handleInputEmail = (e) => {
-    setInputEmail(e.target.value);
-
-    const checkEmail =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    if (checkEmail.test(e.target.value)) {
-      setError('');
-    } else {
-      setError('이메일 형식이 유효하지 않습니다.');
-    }
   };
 
   const handleInputPhone = (e) => {
@@ -63,7 +51,6 @@ export default function PersonalInformation({ handelUserData, signUp }) {
 
   const handleSignUpBtn = () => {
     handelUserData('nickname', inputName);
-    handelUserData('email', inputEmail);
     handelUserData('mobile', inputPhone);
     handelUserData('address', inputAddress);
     handelUserData('zipcode', inputZipcode);
@@ -86,19 +73,10 @@ export default function PersonalInformation({ handelUserData, signUp }) {
             onChange={handleInputName}
             className="mb-25"
           />
-          <label>이메일</label>
-          <input
-            type="text"
-            placeholder="이메일 입력"
-            required
-            value={inputEmail}
-            onChange={handleInputEmail}
-            className="mb-25"
-          />
           <label>전화번호</label>
           <input
             type="number"
-            placeholder="전화번호 입력"
+            placeholder="- 를 제외하고 숫자만 입력해주세요."
             required
             value={inputPhone}
             onChange={handleInputPhone}
@@ -113,8 +91,12 @@ export default function PersonalInformation({ handelUserData, signUp }) {
             onChange={handleInputAddress}
             className="mb-25"
           />
+          <button type="button" onClick={() => setAddressClicked(true)}>
+            주소검색
+          </button>
+          <ErrorText>{error}</ErrorText>
         </Form>
-        <ErrorText>{error}</ErrorText>
+        {/* {addressClicked && <AddressModal />} */}
 
         <SignUpButton
           type="button"
@@ -137,6 +119,7 @@ const SignUpPageWrap = styled.main`
 `;
 
 const Form = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 80%;

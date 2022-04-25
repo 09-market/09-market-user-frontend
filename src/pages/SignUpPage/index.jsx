@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import axios from 'axios';
 
+import { defaultAxios } from 'utils/axiosFunc';
 import { isLogined } from 'utils/isLogined';
 
 import GoBackHeader from 'components/GoBackHeader';
 import BasicInformation from './BasicInformation';
 import PersonalInformation from './PersonalInformation';
+import axios from 'axios';
 
 export default function SignUpPage() {
   const [step, setStep] = useState('basic');
   const [userData, setUserData] = useState({
-    id: '',
+    email: '',
     password: '',
     nickname: '',
-    email: '',
     mobile: '',
     address: '',
     zipcode: 0,
@@ -29,7 +29,16 @@ export default function SignUpPage() {
   // 회원가입 요청 부분 수정해야함
   const signUp = async () => {
     try {
-      const request = await axios.post();
+      await axios.post('http://localhost:8080/api/auth/signup', {
+        data: {
+          email: userData.email,
+          password: userData.password,
+          nickname: userData.nickname,
+          mobile: userData.mobile,
+          address: userData.address,
+          zipcode: userData.zipcode,
+        },
+      });
     } catch (err) {
       console.log(err);
     }
