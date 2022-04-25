@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { defaultAxios } from 'utils/axiosFunc';
 import { isLogined } from 'utils/isLogined';
@@ -10,6 +10,8 @@ import PersonalInformation from './PersonalInformation';
 import axios from 'axios';
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
+
   const [step, setStep] = useState('basic');
   const [userData, setUserData] = useState({
     email: '',
@@ -29,7 +31,7 @@ export default function SignUpPage() {
   // 회원가입 요청 부분 수정해야함
   const signUp = async () => {
     try {
-      await axios.post('http://localhost:8080/api/auth/signup', {
+      await axios.post('http://localhost:8080/api/auth/signup', null, {
         data: {
           email: userData.email,
           password: userData.password,
@@ -39,6 +41,7 @@ export default function SignUpPage() {
           zipcode: userData.zipcode,
         },
       });
+      navigate('/signin');
     } catch (err) {
       console.log(err);
     }

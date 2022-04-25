@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
 import { PALLETS } from 'utils/constants';
 import AddressModal from './AddressModal';
 
 export default function PersonalInformation({ handelUserData, signUp }) {
-  const navigate = useNavigate();
   const [addressClicked, setAddressClicked] = useState(false);
   const [inputName, setInputName] = useState('');
   const [inputPhone, setInputPhone] = useState('');
@@ -56,7 +54,6 @@ export default function PersonalInformation({ handelUserData, signUp }) {
     handelUserData('zipcode', inputZipcode);
 
     signUp();
-    navigate('/');
   };
 
   return (

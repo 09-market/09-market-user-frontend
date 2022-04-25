@@ -161,7 +161,7 @@ const ErrorText = styled.strong`
   bottom: 5px;
   color: rgba(255, 0, 0, 0.7);
   font-size: 0.8rem;
-  animation: blink 0.5s 3 linear;
+  animation: blink 1s linear infinite alternate;
 
   @keyframes blink {
     0% {
