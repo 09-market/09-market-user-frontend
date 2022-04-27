@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 import { Link } from 'react-router-dom';
 
-export default function ProfileModal({
-  profileClicked,
-  setProfileClicked,
+export default function OptionModal({
+  optionClicked,
+  setOptionClicked,
   userId,
 }) {
   return (
     <>
       <ModalContainer
-        profileClicked
-        onClick={() => setProfileClicked(!profileClicked)}
+        optionClicked
+        onClick={() => setOptionClicked(!optionClicked)}
       >
         <ModalItem>
           <Link to={`/profile/${userId}`}>회원정보 수정</Link>
@@ -21,7 +21,7 @@ export default function ProfileModal({
           <Link to="">로그아웃</Link>
         </ModalItem>
       </ModalContainer>
-      <BackGround onClick={() => setProfileClicked(false)} />
+      <BackGround onClick={() => setOptionClicked(false)} />
     </>
   );
 }

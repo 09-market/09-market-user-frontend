@@ -50,6 +50,11 @@ export default function PersonalInformation({ handleUserData, signUp }) {
     handleUserData('address', e.target.value);
   };
 
+  const handleInputZipcode = (e) => {
+    setInputZipcode(e.target.value);
+    handleUserData('zipcode', e.target.value);
+  };
+
   const handleSignUpBtn = () => {
     signUp();
   };
@@ -84,6 +89,15 @@ export default function PersonalInformation({ handleUserData, signUp }) {
             required
             value={inputAddress}
             onChange={handleInputAddress}
+            className="mb-25"
+          />
+          <label>우편번호(수정 예정)</label>
+          <input
+            type="text"
+            placeholder="우편번호 입력"
+            required
+            value={inputZipcode}
+            onChange={handleInputZipcode}
             className="mb-25"
           />
           <button type="button" onClick={() => setAddressClicked(true)}>

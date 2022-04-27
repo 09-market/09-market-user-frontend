@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import SplashPage from 'pages/SplashPage';
 import MainPage from './pages/MainPage';
-import ProfilePage from 'pages/ProfilePage';
+import ProfilePage from './pages/ProfilePage';
+import ProfileModifyPage from './pages/ProfileModifyPage';
 import PostDetailPage from './pages/PostDetailPage';
 import SearchPage from 'pages/SeacrhPage';
 import PostUploadPage from 'pages/PostUploadPage';
@@ -32,9 +33,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route path="/profile/:userId" element={<ProfilePage />} />
+          <Route path="/profile/detail/:userId" element={<ProfilePage />} />
         </Route>
 
+        <Route path="/profile/modify" element={<ProfileModifyPage />} />
         <Route path="/post/upload" element={<PostUploadPage />} />
         <Route path="/post/detail/:postId" element={<PostDetailPage />} />
         <Route path="/search" element={<SearchPage />} />

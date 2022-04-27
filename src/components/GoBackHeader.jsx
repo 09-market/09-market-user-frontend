@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 
-export default function GoBackHeader({ headerTitle, setStep }) {
+export default function GoBackHeader({ headerTitle, setStep, optionBtn }) {
   const navigate = useNavigate();
   return (
     <GoBackHeaderWrap>

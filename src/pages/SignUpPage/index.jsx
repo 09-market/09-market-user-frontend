@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+import axios from '../../api/axios';
 import { defaultAxios } from 'utils/axiosFunc';
 import { isLogined } from 'utils/isLogined';
 
 import GoBackHeader from 'components/GoBackHeader';
 import BasicInformation from './BasicInformation';
 import PersonalInformation from './PersonalInformation';
-import axios from 'axios';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -26,19 +26,21 @@ export default function SignUpPage() {
     setUserData((prevObject) => ({ ...prevObject, [key]: value }));
   };
 
-  // 회원가입 요청 부분 수정해야함
   const signUp = async () => {
     try {
-      await axios.post('http://localhost:8080/api/auth/signup', null, {
-        data: {
-          email: userData.email,
-          password: userData.password,
-          nickname: userData.nickname,
-          mobile: userData.mobile,
-          address: userData.address,
-          zipcode: userData.zipcode,
-        },
-      });
+      await axios.post(
+        '/auth/signup',
+        JSON.stringify({
+          data: {
+            email: userData.email,
+            password: userData.password,
+            nickname: userData.nickname,
+            mobile: userData.mobile,
+            address: userData.address,
+            zipcode: userData.zipcode,
+          },
+        })
+      );
       navigate('/signin');
     } catch (err) {
       console.log(err);
