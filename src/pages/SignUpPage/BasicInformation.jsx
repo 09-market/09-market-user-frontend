@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 
-export default function BasicInformation({ setStep, handelUserData }) {
+export default function BasicInformation({ setStep, handleUserData }) {
   const [inputEmail, setInputEmail] = useState('');
   const [inputPw, setInputPw] = useState('');
   const [inputPwVerify, setInputPwVerify] = useState('');
@@ -36,6 +36,7 @@ export default function BasicInformation({ setStep, handelUserData }) {
 
     if (checkEmail.test(e.target.value)) {
       setError('');
+      handleUserData('email', e.target.value);
     } else {
       setError('이메일 형식이 유효하지 않습니다.');
     }
@@ -47,8 +48,10 @@ export default function BasicInformation({ setStep, handelUserData }) {
 
   const handleInputPwVerify = (e) => {
     setInputPwVerify(e.target.value);
+
     if (e.target.value === inputPw) {
       setError('');
+      handleUserData('password', e.target.value);
     } else {
       setError('비밀번호가 일지하지 않습니다.');
     }
@@ -56,8 +59,6 @@ export default function BasicInformation({ setStep, handelUserData }) {
 
   const handleNextBtn = () => {
     setStep('Personal');
-    handelUserData('email', inputEmail);
-    handelUserData('password', inputPw);
   };
 
   return (

@@ -22,10 +22,8 @@ export default function SignUpPage() {
     zipcode: 0,
   });
 
-  const handelUserData = async ({ key, value }) => {
-    setUserData((prevObject) => {
-      return { ...prevObject, [key]: value };
-    });
+  const handleUserData = (key, value) => {
+    setUserData((prevObject) => ({ ...prevObject, [key]: value }));
   };
 
   // 회원가입 요청 부분 수정해야함
@@ -53,12 +51,12 @@ export default function SignUpPage() {
     return step === 'basic' ? (
       <>
         <GoBackHeader headerTitle={'회원가입'} />
-        <BasicInformation setStep={setStep} handelUserData={handelUserData} />
+        <BasicInformation setStep={setStep} handleUserData={handleUserData} />
       </>
     ) : (
       <>
         <GoBackHeader headerTitle={'회원가입'} setStep={setStep} />
-        <PersonalInformation handelUserData={handelUserData} signUp={signUp} />
+        <PersonalInformation handleUserData={handleUserData} signUp={signUp} />
       </>
     );
   }

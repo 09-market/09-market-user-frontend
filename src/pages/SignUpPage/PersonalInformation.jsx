@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 import AddressModal from './AddressModal';
 
-export default function PersonalInformation({ handelUserData, signUp }) {
+export default function PersonalInformation({ handleUserData, signUp }) {
   const [addressClicked, setAddressClicked] = useState(false);
   const [inputName, setInputName] = useState('');
   const [inputPhone, setInputPhone] = useState('');
@@ -30,6 +30,7 @@ export default function PersonalInformation({ handelUserData, signUp }) {
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
+    handleUserData('nickname', e.target.value);
   };
 
   const handleInputPhone = (e) => {
@@ -38,6 +39,7 @@ export default function PersonalInformation({ handelUserData, signUp }) {
     const checkPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     if (checkPhone.test(e.target.value)) {
       setError('');
+      handleUserData('mobile', e.target.value);
     } else {
       setError('전화번호 형식이 유효하지 않습니다.');
     }
@@ -45,14 +47,10 @@ export default function PersonalInformation({ handelUserData, signUp }) {
 
   const handleInputAddress = (e) => {
     setInputAddress(e.target.value);
+    handleUserData('address', e.target.value);
   };
 
   const handleSignUpBtn = () => {
-    handelUserData('nickname', inputName);
-    handelUserData('mobile', inputPhone);
-    handelUserData('address', inputAddress);
-    handelUserData('zipcode', inputZipcode);
-
     signUp();
   };
 
@@ -93,7 +91,7 @@ export default function PersonalInformation({ handelUserData, signUp }) {
           </button>
           <ErrorText>{error}</ErrorText>
         </Form>
-        {/* {addressClicked && <AddressModal />} */}
+        {addressClicked && <AddressModal />}
 
         <SignUpButton
           type="button"
