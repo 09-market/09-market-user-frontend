@@ -30,15 +30,14 @@ export default function SingInForm() {
 
   const handleSignInBtn = async () => {
     try {
-      await axios.post(
-        '/auth/signin',
-        JSON.stringify({
+      await axios.post('/auth/signin', {
+        body: {
           data: {
             email: userData.email,
             password: userData.password,
           },
-        })
-      );
+        },
+      });
       localStorage.setItem('userId', userData.email);
       navigate('/');
     } catch (err) {

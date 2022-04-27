@@ -1,57 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
+
 import { PALLETS } from 'utils/constants';
+import axios from '../../api/axios';
 
 export default function PostItems({ currentCategory }) {
   const navigate = useNavigate();
 
-  const postData = [
-    {
-      postId: 1,
-      postTitle: '상품명_1',
-      postImageUrl: '/images/example_1.jpg',
-      postLike: 100,
-      postComent: 100,
-    },
-    {
-      postId: 2,
-      postTitle: '상품명_2',
-      postImageUrl: '/images/example_2.jpg',
-      postLike: 200,
-      postComent: 200,
-    },
-  ];
+  const [itemsData, setItemsData] = useState([]);
 
-  return (
-    <>
-      <h2 className="blind">{currentCategory} 카테고리 게시글</h2>
-      <PostsWrap>
-        {postData.map((post) => (
-          <PostItem
-            onClick={() => navigate(`/post/detail/${post.postId}`)}
-            key={post.postId}
-          >
-            <ItemImageWrap>
-              <ItemImage src={post.postImageUrl} alt={post.postTitle} />
-              <ItemBackground />
-            </ItemImageWrap>
-            <ItemInfo>
-              <ItemLike>
-                <span className="blind">좋아요 수</span>
-                {post.postLike}
-              </ItemLike>
-              <ItemComment>
-                <span className="blind">댓글 수</span>
-                {post.postComent}
-              </ItemComment>
-            </ItemInfo>
-          </PostItem>
-        ))}
-      </PostsWrap>
-    </>
-  );
+  const getItems = async () => {
+    try {
+      const res = await axios.get(`/api/item`);
+      setItemsData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  if (itemsData.length > 0)
+    return (
+      <>
+        <h2 className="blind">{currentCategory} 카테고리 게시글</h2>
+        <PostsWrap>
+          {itemsData.map((item) => (
+            <PostItem
+              onClick={() => navigate(`/post/detail/${item.itemId}`)}
+              key={item.itemId}
+            >
+              <ItemImageWrap>
+                <ItemImage src={item.itemImageUrl} alt={item.itemName} />
+                <ItemBackground />
+              </ItemImageWrap>
+              <ItemInfo>
+                <ItemLike>
+                  <span className="blind">좋아요 수</span>
+                  {item.likes}
+                </ItemLike>
+                <ItemComment>
+                  <span className="blind">댓글 수</span>
+                  {item.comments}
+                </ItemComment>
+              </ItemInfo>
+            </PostItem>
+          ))}
+        </PostsWrap>
+      </>
+    );
+  else return <NotExist>상품을 업로드하세요!</NotExist>;
 }
 
 const PostsWrap = styled.ul`
@@ -124,4 +125,11 @@ const ItemComment = styled(ItemLike)`
   &::before {
     background-image: url('/images/comment.png');
   }
+`;
+
+const NotExist = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 200px);
 `;

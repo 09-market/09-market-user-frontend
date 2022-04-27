@@ -19,14 +19,15 @@ export default function PersonalInformation({ handleUserData, signUp }) {
       error.length === 0 &&
       inputName.length > 0 &&
       inputPhone.length > 0 &&
-      inputAddress.length > 0
+      inputAddress.length > 0 &&
+      inputZipcode.length > 0
     ) {
       setError('');
       setDisabledBtn(false);
     } else {
       setDisabledBtn(true);
     }
-  }, [error, inputName, inputPhone, inputAddress]);
+  }, [error, inputName, inputPhone, inputAddress, inputZipcode]);
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
@@ -63,46 +64,50 @@ export default function PersonalInformation({ handleUserData, signUp }) {
     <>
       <SignUpPageWrap>
         <Form method="get">
-          <label>사용자 이름</label>
+          <label htmlFor="inpName">사용자 이름</label>
           <input
             type="text"
             placeholder="사용자 이름 입력"
             required
             autoFocus
+            id="inpName"
             value={inputName}
             onChange={handleInputName}
             className="mb-25"
           />
-          <label>전화번호</label>
+          <label htmlFor="inpPhone">전화번호</label>
           <input
             type="number"
             placeholder="- 를 제외하고 숫자만 입력해주세요."
             required
+            id="inpPhone"
             value={inputPhone}
             onChange={handleInputPhone}
             className="mb-25"
           />
-          <label>주소(수정 예정)</label>
+          <label htmlFor="inpAddress">주소(수정 예정)</label>
           <input
             type="text"
             placeholder="주소 입력"
             required
+            id="inpAddress"
             value={inputAddress}
             onChange={handleInputAddress}
             className="mb-25"
           />
-          <label>우편번호(수정 예정)</label>
+          <label htmlFor="inpZipcode">우편번호(수정 예정)</label>
           <input
             type="text"
             placeholder="우편번호 입력"
             required
+            id="inpZipcode"
             value={inputZipcode}
             onChange={handleInputZipcode}
             className="mb-25"
           />
-          <button type="button" onClick={() => setAddressClicked(true)}>
+          {/* <button type="button" onClick={() => setAddressClicked(true)}>
             주소검색
-          </button>
+          </button> */}
           <ErrorText>{error}</ErrorText>
         </Form>
         {addressClicked && <AddressModal />}

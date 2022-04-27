@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function OptionModal({
-  optionClicked,
-  setOptionClicked,
-  userId,
-}) {
+export default function OptionModal({ optionClicked, setOptionClicked }) {
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/signin');
+  };
+
   return (
     <>
       <ModalContainer
@@ -15,10 +18,12 @@ export default function OptionModal({
         onClick={() => setOptionClicked(!optionClicked)}
       >
         <ModalItem>
-          <Link to={`/profile/${userId}`}>회원정보 수정</Link>
+          <Link to={`/profile/modify`}>회원정보 수정</Link>
         </ModalItem>
         <ModalItem>
-          <Link to="">로그아웃</Link>
+          <LogOutBtn type="button" onClick={logOut}>
+            로그아웃
+          </LogOutBtn>
         </ModalItem>
       </ModalContainer>
       <BackGround onClick={() => setOptionClicked(false)} />
@@ -61,6 +66,10 @@ const ModalItem = styled.li`
   & + li {
     margin-top: 20px;
   }
+`;
+
+const LogOutBtn = styled.button`
+  color: ${PALLETS.PURPLE};
 `;
 
 const BackGround = styled.div`

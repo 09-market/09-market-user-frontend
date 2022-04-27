@@ -62,50 +62,46 @@ export default function BasicInformation({ setStep, handleUserData }) {
   };
 
   return (
-    <>
-      <SignUpPageWrap>
-        <Form method="get">
-          <label>이메일</label>
-          <InputEmailWrap className="mb-30">
-            <input
-              type="text"
-              placeholder="이메일 입력"
-              required
-              autoFocus
-              value={inputEmail}
-              onChange={handleInputEmail}
-            />
-          </InputEmailWrap>
-          <InputPwWrap>
-            <legend className="blind">비밀번호 입력 및 확인</legend>
-            <label>비밀번호</label>
-            <input
-              type="password"
-              placeholder="비밀번호 입력"
-              required
-              value={inputPw}
-              onChange={handleInputPw}
-            />
-            <label>비밀번호 확인</label>
-            <input
-              type="password"
-              placeholder="비밀번호 확인"
-              required
-              value={inputPwVerify}
-              onChange={handleInputPwVerify}
-            />
-          </InputPwWrap>
-          <ErrorText>{error}</ErrorText>
-        </Form>
-        <NextButton
-          type="button"
-          onClick={handleNextBtn}
-          disabled={disabledBtn}
-        >
-          다음
-        </NextButton>
-      </SignUpPageWrap>
-    </>
+    <SignUpPageWrap>
+      <Form method="get">
+        <InputEmailWrap className="mb-30">
+          <label htmlFor="inpEmail">이메일</label>
+          <input
+            type="text"
+            placeholder="이메일 입력"
+            required
+            autoFocus
+            id="inpEmail"
+            value={inputEmail}
+            onChange={handleInputEmail}
+          />
+        </InputEmailWrap>
+        <InputPwWrap>
+          <label htmlFor="inpPw">비밀번호</label>
+          <input
+            type="password"
+            placeholder="비밀번호 입력"
+            required
+            id="inpPw"
+            value={inputPw}
+            onChange={handleInputPw}
+          />
+          <label htmlFor="inpPwVerify">비밀번호 확인</label>
+          <input
+            type="password"
+            placeholder="비밀번호 확인"
+            required
+            id="inpPwVerify"
+            value={inputPwVerify}
+            onChange={handleInputPwVerify}
+          />
+        </InputPwWrap>
+        <ErrorText>{error}</ErrorText>
+      </Form>
+      <NextButton type="button" onClick={handleNextBtn} disabled={disabledBtn}>
+        다음
+      </NextButton>
+    </SignUpPageWrap>
   );
 }
 

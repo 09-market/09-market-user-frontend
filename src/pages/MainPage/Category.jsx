@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 
 export default function Category({ currentCategory, setCurrentCategory }) {
-  const categoryData = ['전체', '화장품', '의류', '식품'];
+  const categoryData = ['전체'];
 
   const handleCategory = (e) => {
     setCurrentCategory(e.target.innerText);

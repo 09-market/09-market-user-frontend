@@ -37,7 +37,9 @@ export default function Header() {
         공구
         <ColorLogo>마켓</ColorLogo>
       </Logo>
-      <SearchButton to="/search" title="검색 버튼" />
+      <SearchButton to="/search">
+        <span className="blind">검색 버튼</span>
+      </SearchButton>
     </HeaderWrap>
   );
 }

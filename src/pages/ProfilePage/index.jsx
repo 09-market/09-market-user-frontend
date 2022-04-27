@@ -3,24 +3,13 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { isLogined } from 'utils/isLogined';
 
-import ProfilePageHeader from './ProfilePageHeader';
-import OptionModal from 'components/OptionModal';
-
 export default function ProfilePage() {
   const params = useParams();
-  const [userId, setUserId] = useState('');
-  const [optionClicked, setOptionClicked] = useState(false);
+  const [userData, setUserData] = useState({});
 
   if (isLogined()) {
     return (
       <>
-        {optionClicked && (
-          <OptionModal
-            optionClicked={optionClicked}
-            setOptionClicked={setOptionClicked}
-            userId={userId}
-          />
-        )}
         <p>ProfilePage</p>
       </>
     );

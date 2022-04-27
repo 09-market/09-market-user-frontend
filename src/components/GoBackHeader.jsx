@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 
-export default function GoBackHeader({ headerTitle, setStep, optionBtn }) {
+export default function GoBackHeader({ headerTitle, setStep, uploadBtn }) {
   const navigate = useNavigate();
   return (
     <GoBackHeaderWrap>
@@ -24,7 +24,7 @@ const GoBackHeaderWrap = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  height: 50px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;

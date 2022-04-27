@@ -28,9 +28,8 @@ export default function SignUpPage() {
 
   const signUp = async () => {
     try {
-      await axios.post(
-        '/auth/signup',
-        JSON.stringify({
+      await axios.post('/auth/signup', {
+        body: {
           data: {
             email: userData.email,
             password: userData.password,
@@ -39,8 +38,8 @@ export default function SignUpPage() {
             address: userData.address,
             zipcode: userData.zipcode,
           },
-        })
-      );
+        },
+      });
       navigate('/signin');
     } catch (err) {
       console.log(err);

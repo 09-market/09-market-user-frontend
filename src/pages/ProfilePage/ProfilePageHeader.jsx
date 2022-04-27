@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import { PALLETS } from 'utils/constants';
 
+import OptionModal from 'components/OptionModal';
+
 export default function ProfilePageHeader({ userName }) {
+  const [optionClicked, setOptionClicked] = useState(false);
+
   return (
-    <ProfilePageHeaderWrap>
-      <Title>
-        {userName} 님<span className="blind">프로필</span>
-      </Title>
-      <OptionButton type="button" title="검색 버튼" />
-    </ProfilePageHeaderWrap>
+    <>
+      <ProfilePageHeaderWrap>
+        <Title>
+          {userName} 님<span className="blind">프로필</span>
+        </Title>
+        <OptionButton
+          type="button"
+          onClick={() => setOptionClicked(!optionClicked)}
+        >
+          <span className="blind">옵션 버튼</span>
+        </OptionButton>
+      </ProfilePageHeaderWrap>
+      {optionClicked && (
+        <OptionModal
+          optionClicked={optionClicked}
+          setOptionClicked={setOptionClicked}
+        />
+      )}
+    </>
   );
 }
 
