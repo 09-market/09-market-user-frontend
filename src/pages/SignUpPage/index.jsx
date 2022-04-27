@@ -29,16 +29,12 @@ export default function SignUpPage() {
   const signUp = async () => {
     try {
       await axios.post('/auth/signup', {
-        body: {
-          data: {
-            email: userData.email,
-            password: userData.password,
-            nickname: userData.nickname,
-            mobile: userData.mobile,
-            address: userData.address,
-            zipcode: userData.zipcode,
-          },
-        },
+        email: userData.email,
+        password: userData.password,
+        nickname: userData.nickname,
+        mobile: userData.mobile,
+        address: userData.address,
+        zipcode: userData.zipcode,
       });
       navigate('/signin');
     } catch (err) {

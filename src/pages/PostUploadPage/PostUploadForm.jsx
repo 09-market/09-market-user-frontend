@@ -75,17 +75,13 @@ export default function PostUploadForm() {
   const handleUploadBtn = () => {
     try {
       axios.post(`/api/item`, {
-        body: {
-          data: {
-            file: inputImgUrl,
-            itemDto: {
-              name: inputName,
-              itemInfo: inputInfo,
-              price: inputPrice,
-              amount: inputAmount,
-              category: inputCategory,
-            },
-          },
+        file: inputImgUrl,
+        itemDto: {
+          name: inputName,
+          itemInfo: inputInfo,
+          price: inputPrice,
+          amount: inputAmount,
+          category: inputCategory,
         },
       });
     } catch (err) {

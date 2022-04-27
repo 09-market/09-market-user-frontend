@@ -104,15 +104,11 @@ export default function ProfileModifyForm() {
 
     try {
       await axios.put(`/user/${userId}`, {
-        body: {
-          data: {
-            password: userData.password,
-            nickname: userData.nickname,
-            mobile: userData.mobile,
-            address: userData.address,
-            zipcode: userData.zipcode,
-          },
-        },
+        password: userData.password,
+        nickname: userData.nickname,
+        mobile: userData.mobile,
+        address: userData.address,
+        zipcode: userData.zipcode,
       });
       navigate('/signin');
     } catch (err) {
