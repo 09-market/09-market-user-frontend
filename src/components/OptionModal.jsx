@@ -1,14 +1,27 @@
 import React from 'react';
-import styled from 'styled-components';
-import { PALLETS } from 'utils/constants';
 import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { PALLETS } from 'utils/constants';
+import axios from '../api/axios';
 
 export default function OptionModal({ optionClicked, setOptionClicked }) {
   const navigate = useNavigate();
 
-  const logOut = () => {
-    localStorage.clear();
-    navigate('/signin');
+  const logOut = async (userData) => {
+    const data = {
+      email: userData.email,
+    };
+    axios
+      .post('/auth/logout', data)
+      .then((res) => {
+        console.log(res);
+        localStorage.clear();
+        navigate('/signin');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
