@@ -28,17 +28,23 @@ export default function SingInForm() {
     handleUserData('password', e.target.value);
   };
 
-  const handleSignInBtn = async () => {
-    try {
-      await axios.post('/auth/signin', {
-        email: userData.email,
-        password: userData.password,
+  const handleSignInBtn = async (userData) => {
+    const data = {
+      email: userData.email,
+      password: userData.password,
+    };
+
+    await axios
+      .post('/auth/signin', data)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('token', res);
+        localStorage.setItem('userId', userData.email);
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      localStorage.setItem('userId', userData.email);
-      navigate('/');
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -60,7 +66,7 @@ export default function SingInForm() {
         onChange={handleInputPw}
       />
       {/* <strong>{res.error}</strong> */}
-      <SignInButton type="button" onClick={handleSignInBtn}>
+      <SignInButton type="button" onClick={() => handleSignInBtn(userData)}>
         로그인
       </SignInButton>
     </Form>

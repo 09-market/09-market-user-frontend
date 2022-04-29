@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import axios from '../../api/axios';
 import { defaultAxios } from 'utils/axiosFunc';
 import { isLogined } from 'utils/isLogined';
 
@@ -26,22 +25,6 @@ export default function SignUpPage() {
     setUserData((prevObject) => ({ ...prevObject, [key]: value }));
   };
 
-  const signUp = async () => {
-    try {
-      await axios.post('/auth/signup', {
-        email: userData.email,
-        password: userData.password,
-        nickname: userData.nickname,
-        mobile: userData.mobile,
-        address: userData.address,
-        zipcode: userData.zipcode,
-      });
-      navigate('/signin');
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   if (isLogined()) {
     return <Navigate replace to="/" />;
   } else {
@@ -53,7 +36,10 @@ export default function SignUpPage() {
     ) : (
       <>
         <GoBackHeader headerTitle={'회원가입'} setStep={setStep} />
-        <PersonalInformation handleUserData={handleUserData} signUp={signUp} />
+        <PersonalInformation
+          userData={userData}
+          handleUserData={handleUserData}
+        />
       </>
     );
   }

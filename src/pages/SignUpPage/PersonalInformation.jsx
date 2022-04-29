@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import axios from '../../api/axios';
 import { PALLETS } from 'utils/constants';
+
 import AddressModal from './AddressModal';
 
-export default function PersonalInformation({ handleUserData, signUp }) {
+export default function PersonalInformation({ userData, handleUserData }) {
+  const navigate = useNavigate();
+
   const [addressClicked, setAddressClicked] = useState(false);
   const [inputName, setInputName] = useState('');
   const [inputPhone, setInputPhone] = useState('');
@@ -56,8 +61,26 @@ export default function PersonalInformation({ handleUserData, signUp }) {
     handleUserData('zipcode', e.target.value);
   };
 
+  const signUp = async (userData) => {
+    const data = {
+      email: userData.email,
+      password: userData.password,
+      nickname: userData.nickname,
+      mobile: userData.mobile,
+      address: userData.address,
+      zipcode: userData.zipcode,
+    };
+    await axios
+      .post('/auth/signup', data)
+      .then((res) => {
+        console.log(res);
+        navigate('/signin');
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleSignUpBtn = () => {
-    signUp();
+    signUp(userData);
   };
 
   return (

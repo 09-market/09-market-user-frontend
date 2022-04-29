@@ -99,21 +99,24 @@ export default function ProfileModifyForm() {
     handleUserData('zipcode', e.target.value);
   };
 
-  const handleNextBtn = async () => {
-    navigate('/profile/detail');
+  const handleNextBtn = async (userData) => {
+    const data = {
+      password: userData.password,
+      nickname: userData.nickname,
+      mobile: userData.mobile,
+      address: userData.address,
+      zipcode: userData.zipcode,
+    };
 
-    try {
-      await axios.put(`/user/${userId}`, {
-        password: userData.password,
-        nickname: userData.nickname,
-        mobile: userData.mobile,
-        address: userData.address,
-        zipcode: userData.zipcode,
+    await axios
+      .put(`/user/${userId}`, data)
+      .then((res) => {
+        console.log(res);
+        navigate('/signin');
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      navigate('/signin');
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -170,7 +173,11 @@ export default function ProfileModifyForm() {
         />
         <ErrorText>{error}</ErrorText>
       </Form>
-      <NextButton type="button" onClick={handleNextBtn} disabled={disabledBtn}>
+      <NextButton
+        type="button"
+        onClick={() => handleNextBtn(userData)}
+        disabled={disabledBtn}
+      >
         수정하기
       </NextButton>
     </SignUpPageWrap>

@@ -11,12 +11,10 @@ export default function PostItems({ currentCategory }) {
   const [itemsData, setItemsData] = useState([]);
 
   const getItems = async () => {
-    try {
-      const res = await axios.get(`/api/item`);
+    await axios.get(`/api/item`).then((res) => {
+      console.log(res);
       setItemsData(res.data);
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   useEffect(() => {

@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 import axios from '../../api/axios';
 
 export default function PostUploadForm() {
+  const navigate = useNavigate();
+
   const [inputImgUrl, setInputImgUrl] = useState('');
   const [inputName, setInputName] = useState('');
   const [inputInfo, setInputInfo] = useState('');
   const [inputPrice, setInputPrice] = useState(0);
   const [inputAmount, setInputAmount] = useState(0);
   const [inputCategory, setInputCategory] = useState('');
+
+  const [postData, setPostData] = useState({
+    file: '',
+    itemDto: {
+      name: '',
+      itemInfo: '',
+      price: 0,
+      amount: 0,
+      category: '',
+    },
+  });
 
   const [disabledBtn, setDisabledBtn] = useState(true);
 
@@ -36,8 +50,13 @@ export default function PostUploadForm() {
     inputCategory,
   ]);
 
+  const handleUserData = (key, value) => {
+    setPostData((prevObject) => ({ ...prevObject, [key]: value }));
+  };
+
   const handleInputImg = (e) => {
     setInputImgUrl(e.target.files);
+    handleUserData('file', e.target.value);
     encodeFileToBase64(e.target.files[0]);
   };
 
@@ -54,39 +73,49 @@ export default function PostUploadForm() {
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
+    handleUserData('itemDto', { name: e.target.value });
   };
 
   const handleInputInfo = (e) => {
     setInputInfo(e.target.value);
+    handleUserData('itemDto', { itemInfo: e.target.value });
   };
 
   const handleInputPrice = (e) => {
     setInputPrice(e.target.value);
+    handleUserData('itemDto', { price: e.target.value });
   };
 
   const handleInputAmount = (e) => {
     setInputAmount(e.target.value);
+    handleUserData('itemDto', { amount: e.target.value });
   };
 
   const handleInputCategory = (e) => {
     setInputCategory(e.target.value);
+    handleUserData('itemDto', { category: e.target.value });
   };
 
-  const handleUploadBtn = () => {
-    try {
-      axios.post(`/api/item`, {
-        file: inputImgUrl,
-        itemDto: {
-          name: inputName,
-          itemInfo: inputInfo,
-          price: inputPrice,
-          amount: inputAmount,
-          category: inputCategory,
-        },
+  const handleUploadBtn = (postData) => {
+    const data = {
+      file: postData.file,
+      itemDto: {
+        name: postData.itemDto.name,
+        itemInfo: postData.itemDto.itemInfo,
+        price: postData.itemDto.price,
+        amount: postData.itemDto.amount,
+        category: postData.itemDto.category,
+      },
+    };
+    axios
+      .post(`/api/item`, data)
+      .then((res) => {
+        console.log(res);
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -150,7 +179,7 @@ export default function PostUploadForm() {
       <UploadButton
         type="button"
         disabled={disabledBtn}
-        onClick={handleUploadBtn}
+        onClick={() => handleUploadBtn()}
       >
         게시하기
       </UploadButton>
