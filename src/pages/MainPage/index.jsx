@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Category from './Category';
-import PostItems from './PostItems';
+import FeedItems from './FeedItems';
 
 export default function MainPage() {
   const [currentCategory, setCurrentCategory] = useState('전체');
@@ -12,7 +12,7 @@ export default function MainPage() {
         currentCategory={currentCategory}
         setCurrentCategory={setCurrentCategory}
       />
-      <PostItems currentCategory={currentCategory} />
+      <FeedItems currentCategory={currentCategory} />
     </>
   );
 }

@@ -5,16 +5,19 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 import axios from '../../api/axios';
 
-export default function PostItems({ currentCategory }) {
+export default function FeedItems({ currentCategory }) {
   const navigate = useNavigate();
 
   const [itemsData, setItemsData] = useState([]);
 
   const getItems = async () => {
-    await axios.get(`/api/item`).then((res) => {
-      console.log(res);
-      setItemsData(res.data);
-    });
+    await axios
+      .get(`/api/item`)
+      .then((res) => {
+        console.log(res);
+        setItemsData(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -129,5 +132,5 @@ const NotExist = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 240px);
 `;
