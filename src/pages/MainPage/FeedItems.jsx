@@ -10,7 +10,7 @@ export default function FeedItems({ currentCategory }) {
 
   const [itemsData, setItemsData] = useState([]);
 
-  const getItems = async () => {
+  const getFeedItems = async () => {
     await axios
       .get(`/api/item`)
       .then((res) => {
@@ -21,7 +21,7 @@ export default function FeedItems({ currentCategory }) {
   };
 
   useEffect(() => {
-    getItems();
+    getFeedItems();
   }, []);
 
   if (itemsData.length > 0)

@@ -1,11 +1,31 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+import axios from '../../api/axios';
+
 export default function PostItem() {
+  const postId = useParams().postId;
+  const [itemData, setItemData] = useState({});
+
+  const getPostItem = async () => {
+    const res = await axios
+      .get(`api/item/${postId}`)
+      .then((res) => {
+        console.log(res);
+        setItemData(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <PostItemWrap>
       <ItemImage src="" alt="" />
+      <ItemTitle></ItemTitle>
+      <ItemInfoWrap>
+        <ItemLike></ItemLike>
+        <ItemComment></ItemComment>
+      </ItemInfoWrap>
     </PostItemWrap>
   );
 }
@@ -25,3 +45,11 @@ const ItemImage = styled.img`
     height: 500px;
   }
 `;
+
+const ItemTitle = styled.h2``;
+
+const ItemInfoWrap = styled.div``;
+
+const ItemLike = styled.p``;
+
+const ItemComment = styled.p``;
