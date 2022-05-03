@@ -13,7 +13,8 @@ export default function PostUploadForm() {
   const [inputInfo, setInputInfo] = useState('');
   const [inputPrice, setInputPrice] = useState(0);
   const [inputAmount, setInputAmount] = useState(0);
-  const [inputCategory, setInputCategory] = useState('');
+  const [inputCategory, setInputUrl] = useState('');
+  const [inputUrl, setInputCategory] = useState('');
 
   const [postData, setPostData] = useState({
     file: '',
@@ -96,6 +97,11 @@ export default function PostUploadForm() {
     handleUserData('itemDto', { category: e.target.value });
   };
 
+  const handleInputUrl = (e) => {
+    setInputUrl(e.target.value);
+    handleUserData('itemDto', { url: e.target.value });
+  };
+
   const handleUploadBtn = (postData) => {
     const data = {
       file: postData.file,
@@ -166,14 +172,23 @@ export default function PostUploadForm() {
           value={inputAmount}
           onChange={handleInputAmount}
         />
-        <label htmlFor="inpName">카테고리</label>
+        <label htmlFor="inpCategory">카테고리(수정 예정)</label>
         <input
           type="text"
           placeholder="카테고리 입력"
           required
-          id="inpName"
+          id="inpCategory"
           value={inputCategory}
           onChange={handleInputCategory}
+        />
+        <label htmlFor="inpUrl">URL</label>
+        <input
+          type="text"
+          placeholder="URL 입력"
+          required
+          id="inpUrl"
+          value={inputUrl}
+          onChange={handleInputUrl}
         />
       </Form>
       <UploadButton
@@ -188,7 +203,7 @@ export default function PostUploadForm() {
 }
 
 const PostUploadWrap = styled.main`
-  height: 100vh;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -216,9 +231,9 @@ const ImgUpload = styled.label`
   justify-content: center;
   align-items: center;
   color: ${PALLETS.WHITE};
-  width: 100%;
+  width: 300px;
   height: 300px;
-  margin: 0 0 20px !important;
+  margin: 0 auto 20px !important;
 
   ${(props) =>
     props.itemImgUrl.length > 0
