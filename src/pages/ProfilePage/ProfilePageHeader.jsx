@@ -5,15 +5,12 @@ import { PALLETS } from 'utils/constants';
 
 import OptionModal from 'components/OptionModal';
 
-export default function ProfilePageHeader({ userName }) {
+export default function ProfilePageHeader() {
   const [optionClicked, setOptionClicked] = useState(false);
 
   return (
     <>
       <ProfilePageHeaderWrap>
-        <Title>
-          {userName} 님<span className="blind">프로필</span>
-        </Title>
         <OptionButton
           type="button"
           onClick={() => setOptionClicked(!optionClicked)}
@@ -42,10 +39,6 @@ const ProfilePageHeaderWrap = styled.header`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background-color: ${PALLETS.PURPLE};
   z-index: 9999;
-`;
-
-const Title = styled.h1`
-  color: ${PALLETS.WHITE};
 `;
 
 const OptionButton = styled.button`

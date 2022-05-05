@@ -49,7 +49,7 @@ const ModalContainer = styled.ul`
   position: fixed;
   bottom: 0;
   left: 0;
-  color: ${PALLETS.PURPLE};
+  color: ${PALLETS.BLACK};
   background-color: ${PALLETS.WHITE};
   border: 1px solid ${PALLETS.PURPLE};
   border-bottom: none;
@@ -82,7 +82,7 @@ const ModalItem = styled.li`
 `;
 
 const LogOutBtn = styled.button`
-  color: ${PALLETS.PURPLE};
+  color: ${PALLETS.BLACK};
 `;
 
 const BackGround = styled.div`

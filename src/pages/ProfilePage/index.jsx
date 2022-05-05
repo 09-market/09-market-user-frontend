@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+import UserInfo from './UserInfo';
+import PostsInfo from './PostsInfo';
 
 import { isLogined } from 'utils/isLogined';
 
 export default function ProfilePage() {
-  const params = useParams();
-  const [userData, setUserData] = useState({});
-
   if (isLogined()) {
     return (
       <>
-        <p>ProfilePage</p>
+        <UserInfo />
+        <PostsInfo />
       </>
     );
   } else {

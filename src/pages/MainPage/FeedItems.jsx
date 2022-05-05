@@ -12,7 +12,7 @@ export default function FeedItems({ currentCategory }) {
 
   const getFeedItems = async () => {
     await axios
-      .get(`/api/item`)
+      .get(`/item`)
       .then((res) => {
         console.log(res);
         setItemsData(res.data);
@@ -53,7 +53,7 @@ export default function FeedItems({ currentCategory }) {
         </PostsWrap>
       </>
     );
-  else return <NotExist>상품을 업로드하세요!</NotExist>;
+  else return <NotExist>등록된 상품이 없습니다.</NotExist>;
 }
 
 const PostsWrap = styled.ul`
