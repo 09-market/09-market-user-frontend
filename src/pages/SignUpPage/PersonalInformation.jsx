@@ -72,8 +72,7 @@ export default function PersonalInformation({ userData, handleUserData }) {
     };
     await axios
       .post('/auth/signup', data)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         navigate('/signin');
       })
       .catch((err) => console.log(err));

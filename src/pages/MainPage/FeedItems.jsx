@@ -14,7 +14,6 @@ export default function FeedItems({ currentCategory }) {
     await axios
       .get(`/item`)
       .then((res) => {
-        console.log(res);
         setItemsData(res.data);
       })
       .catch((err) => console.log(err));

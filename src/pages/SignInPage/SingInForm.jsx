@@ -37,13 +37,12 @@ export default function SingInForm() {
     await axios
       .post('/auth/signin', data)
       .then((res) => {
-        console.log(res);
-        localStorage.setItem('token', res);
-        localStorage.setItem('userId', userData.email);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.userId);
         navigate('/');
       })
       .catch((err) => {
-        console.log(err);
+        window.alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
       });
   };
 

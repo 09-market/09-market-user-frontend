@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import axios from '../../api/axios';
+
 export default function UserInfo() {
-  const userId = localStorage.getItem('userId');
-  const [userData, setUserData] = useState({
-    point: 0,
-  });
+  const [userData, setUserData] = useState({});
+
+  const getUserProfile = async () => {
+    const userId = localStorage.getItem('userId');
+    const userToken = localStorage.getItem('token');
+
+    await axios
+      .get(`/user/${userId}`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      })
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
 
   return (
     <UserInfoWrap>
       <UserNameWrap>
-        <UserName>{userId}</UserName> 님
+        <UserName>{userData.nickname}</UserName> 님
         <span className="blind">프로필 페이지</span>
       </UserNameWrap>
       <UserPoint>

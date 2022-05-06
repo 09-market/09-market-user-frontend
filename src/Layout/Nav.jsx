@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { PALLETS } from 'utils/constants';
 
 export default function Nav() {
+  const userId = localStorage.getItem('id');
+
   return (
     <NavWrap>
       <NavContainer>

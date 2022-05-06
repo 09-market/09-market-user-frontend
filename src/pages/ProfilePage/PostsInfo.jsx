@@ -16,8 +16,8 @@ export default function FeedInfo() {
       <FeedInfoWrap>
         <h2 className="blind">{userId}님이 업로드한 상품 정보</h2>
         <PostsContainer>
-          {itemsData.map((item) => (
-            <PostItem>
+          {itemsData.map((item, index) => (
+            <PostItem key={index}>
               <img src={item.imgUrl} alt="" />
             </PostItem>
           ))}

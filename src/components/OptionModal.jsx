@@ -9,13 +9,13 @@ export default function OptionModal({ optionClicked, setOptionClicked }) {
   const navigate = useNavigate();
 
   const logOut = async (userData) => {
-    const data = {
-      email: userData.email,
-    };
+    const userToken = localStorage.getItem('token');
+
     axios
-      .post('/auth/logout', data)
+      .post('/auth/logout', {
+        headers: { Authorization: `Bearer ${userToken}` },
+      })
       .then((res) => {
-        console.log(res);
         localStorage.clear();
         navigate('/signin');
       })
