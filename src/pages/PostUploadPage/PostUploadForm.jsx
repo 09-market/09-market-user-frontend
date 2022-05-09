@@ -114,7 +114,7 @@ export default function PostUploadForm() {
       },
     };
     axios
-      .post(`/api/item`, data)
+      .post(`/api/feed`, data)
       .then((res) => {
         console.log(res);
         navigate('/');
