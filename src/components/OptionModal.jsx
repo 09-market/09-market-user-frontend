@@ -15,7 +15,7 @@ export default function OptionModal({ optionClicked, setOptionClicked }) {
       .post('/auth/logout', {
         headers: { Authorization: `Bearer ${userToken}` },
       })
-      .then((res) => {
+      .then(() => {
         localStorage.clear();
         navigate('/signin');
       })

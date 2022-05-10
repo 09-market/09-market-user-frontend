@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import axios from '../../api/axios';
 
 export default function UserInfo() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({});
 
   const getUserProfile = async () => {
@@ -17,7 +19,12 @@ export default function UserInfo() {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.status !== 200) {
+          localStorage.clear();
+          navigate('/signin');
+        }
+      });
   };
 
   useEffect(() => {
