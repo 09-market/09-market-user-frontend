@@ -7,22 +7,26 @@ import axios from '../api/axios';
 
 export default function OptionModal({ optionClicked, setOptionClicked }) {
   const navigate = useNavigate();
-
-  const logOut = async (userData) => {
-    const userToken = localStorage.getItem('token');
-
-    axios
-      .post('/auth/logout', {
-        headers: { Authorization: `Bearer ${userToken}` },
-      })
-      .then(() => {
-        localStorage.clear();
-        navigate('/signin');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/signin');
   };
+
+  // const logOut = async (userData) => {
+  //   const userToken = localStorage.getItem('token');
+
+  //   axios
+  //     .post('/auth/logout', {
+  //       headers: { Authorization: `Bearer ${userToken}` },
+  //     })
+  //     .then(() => {
+  //       localStorage.clear();
+  //       navigate('/signin');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <>
