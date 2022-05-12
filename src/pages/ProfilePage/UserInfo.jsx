@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
 import axios from '../../api/axios';
+
+import Loading from 'components/Loading';
 
 export default function UserInfo() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  const getUserProfile = async () => {
+  const getUserProfile = useCallback(async () => {
     const userId = localStorage.getItem('userId');
     const userToken = localStorage.getItem('token');
 
@@ -17,6 +19,7 @@ export default function UserInfo() {
         headers: { Authorization: `Bearer ${userToken}` },
       })
       .then((res) => {
+        setLoading(false);
         setUserData(res.data);
       })
       .catch((err) => {
@@ -25,23 +28,27 @@ export default function UserInfo() {
           navigate('/signin');
         }
       });
-  };
+  }, [navigate]);
 
   useEffect(() => {
     getUserProfile();
-  }, []);
+  }, [getUserProfile]);
 
-  return (
-    <UserInfoWrap>
-      <UserNameWrap>
-        <UserName>{userData.nickname}</UserName> 님
-        <span className="blind">프로필 페이지</span>
-      </UserNameWrap>
-      <UserPoint>
-        보유포인트 : <span>{userData.point}</span> 점
-      </UserPoint>
-    </UserInfoWrap>
-  );
+  if (!loading) {
+    return (
+      <UserInfoWrap>
+        <UserNameWrap>
+          <UserName>{userData.nickname}</UserName> 님
+          <span className="blind">프로필 페이지</span>
+        </UserNameWrap>
+        <UserPoint>
+          보유포인트 : <span>{userData.point}</span> 점
+        </UserPoint>
+      </UserInfoWrap>
+    );
+  } else {
+    return <Loading />;
+  }
 }
 
 const UserInfoWrap = styled.section`
