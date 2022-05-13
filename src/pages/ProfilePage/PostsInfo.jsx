@@ -40,6 +40,8 @@ const PostsContainer = styled.ul`
 `;
 
 const PostItem = styled.li`
+  cursor: pointer;
+
   img {
     width: 100%;
     height: 100%;

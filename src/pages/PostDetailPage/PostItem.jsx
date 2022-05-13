@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import axios from '../../api/axios';
@@ -21,6 +21,7 @@ export default function PostItem() {
   return (
     <PostItemWrap>
       <ItemImage src="" alt="" />
+      <InstagramLink to="">Instagram 이동하기</InstagramLink>
       <ItemTitle></ItemTitle>
       <ItemInfoWrap>
         <ItemLike></ItemLike>
@@ -45,6 +46,8 @@ const ItemImage = styled.img`
     height: 500px;
   }
 `;
+
+const InstagramLink = styled(Link)``;
 
 const ItemTitle = styled.h2``;
 
