@@ -9,7 +9,7 @@ export default function PostItem() {
   const [itemData, setItemData] = useState({});
 
   const getPostItem = async () => {
-    const res = await axios
+    await axios
       .get(`api/item/${postId}`)
       .then((res) => {
         console.log(res);
@@ -20,8 +20,12 @@ export default function PostItem() {
 
   return (
     <PostItemWrap>
-      <ItemImage src="" alt="" />
-      <InstagramLink to="">Instagram 이동하기</InstagramLink>
+      <PostAuthorWrap>
+        <AuthorImage src="" alt="" />
+        <AuthorName></AuthorName>
+      </PostAuthorWrap>
+      <ItemImage src="/images/example_1.jpg" alt="" />
+      <InstagramLink to="">Instagram 이동하기 {'>'}</InstagramLink>
       <ItemTitle></ItemTitle>
       <ItemInfoWrap>
         <ItemLike></ItemLike>
@@ -32,8 +36,17 @@ export default function PostItem() {
 }
 
 const PostItemWrap = styled.main`
-  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  margin: 80px auto 0;
+  width: 95vw;
 `;
+
+const PostAuthorWrap = styled.div``;
+
+const AuthorImage = styled.img``;
+
+const AuthorName = styled.p``;
 
 const ItemImage = styled.img`
   position: relative;
