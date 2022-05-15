@@ -10,29 +10,39 @@ export default function Category({ currentCategory, setCurrentCategory }) {
   };
 
   return (
-    <CategoryContainer>
-      {categoryData.map((category) => {
-        if (category === currentCategory) {
-          return (
-            <ClickedCategoryItem key={category}>{category}</ClickedCategoryItem>
-          );
-        } else {
-          return (
-            <CategoryItem onClick={handleCategory} key={category}>
-              {category}
-            </CategoryItem>
-          );
-        }
-      })}
-    </CategoryContainer>
+    <CategoryWrap>
+      <CategoryContainer>
+        {categoryData.map((category) => {
+          if (category === currentCategory) {
+            return (
+              <ClickedCategoryItem key={category}>
+                {category}
+              </ClickedCategoryItem>
+            );
+          } else {
+            return (
+              <CategoryItem onClick={handleCategory} key={category}>
+                {category}
+              </CategoryItem>
+            );
+          }
+        })}
+      </CategoryContainer>
+    </CategoryWrap>
   );
 }
+
+const CategoryWrap = styled.div`
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+`;
 
 const CategoryContainer = styled.ul`
   display: flex;
   align-items: center;
+  max-width: 1000px;
   height: 50px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 `;
 
 const CategoryItem = styled.li`

@@ -33,13 +33,15 @@ export default function Header() {
 
   return (
     <HeaderWrap className={hide && 'header-sticky'}>
-      <Logo onClick={() => handleLinkLogo()}>
-        공구
-        <ColorLogo>마켓</ColorLogo>
-      </Logo>
-      <SearchButton to="/search">
-        <span className="blind">검색 버튼</span>
-      </SearchButton>
+      <HeaderItems>
+        <Logo onClick={() => handleLinkLogo()}>
+          공구
+          <ColorLogo>마켓</ColorLogo>
+        </Logo>
+        <SearchButton to="/search">
+          <span className="blind">검색 버튼</span>
+        </SearchButton>
+      </HeaderItems>
     </HeaderWrap>
   );
 }
@@ -49,10 +51,6 @@ const HeaderWrap = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
   padding: 0 7vw;
   background-color: ${PALLETS.PURPLE};
   color: ${PALLETS.WHITE};
@@ -62,6 +60,15 @@ const HeaderWrap = styled.header`
   &.header-sticky {
     transform: translateY(-100px);
   }
+`;
+
+const HeaderItems = styled.div`
+  max-width: 1000px;
+  height: 70px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Logo = styled.h1`

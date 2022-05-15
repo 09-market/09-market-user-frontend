@@ -35,14 +35,14 @@ const NavWrap = styled.nav`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px;
   background-color: ${PALLETS.WHITE};
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const NavContainer = styled.ul`
-  width: 100%;
-  height: 100%;
+  max-width: 1000px;
+  height: 70px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;

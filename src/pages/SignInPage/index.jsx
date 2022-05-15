@@ -29,6 +29,8 @@ export default function SignInPage() {
 }
 const SignInPageWrap = styled.main`
   height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
