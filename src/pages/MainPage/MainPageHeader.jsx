@@ -51,7 +51,6 @@ const HeaderWrap = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 0 7vw;
   background-color: ${PALLETS.PURPLE};
   color: ${PALLETS.WHITE};
   transition: all 0.3s;
@@ -63,7 +62,7 @@ const HeaderWrap = styled.header`
 `;
 
 const HeaderItems = styled.div`
-  max-width: 1000px;
+  max-width: 90vw;
   height: 70px;
   margin: 0 auto;
   display: flex;

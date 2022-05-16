@@ -40,7 +40,7 @@ const NavWrap = styled.nav`
 `;
 
 const NavContainer = styled.ul`
-  max-width: 1000px;
+  max-width: 90vw;
   height: 70px;
   margin: 0 auto;
   display: flex;

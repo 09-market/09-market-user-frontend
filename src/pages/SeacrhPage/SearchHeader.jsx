@@ -33,13 +33,12 @@ const SearchHeaderWrap = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 0 7vw;
   background-color: ${PALLETS.PURPLE};
   color: ${PALLETS.WHITE};
 `;
 
 const SearchHeaderItems = styled.div`
-  max-width: 1000px;
+  max-width: 90vw;
   height: 70px;
   margin: 0 auto;
   display: flex;
@@ -56,7 +55,7 @@ const SearchButton = styled.button`
 
 const SearchInput = styled.input`
   box-sizing: border-box;
-  width: 100%;
+  width: calc(90vw - 80px);
   margin: 0 10px;
   padding: 5px 0 5px 10px;
   border-radius: 5px;
@@ -67,7 +66,7 @@ const SearchInput = styled.input`
       width: 0;
     }
     100% {
-      width: 100%;
+      width: calc(90vw - 80px);
     }
   }
 `;

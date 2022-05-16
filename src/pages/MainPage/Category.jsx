@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 
 export default function Category({ currentCategory, setCurrentCategory }) {
-  const categoryData = ['전체'];
+  const categoryData = ['전체', '화장품'];
 
   const handleCategory = (e) => {
     setCurrentCategory(e.target.innerText);
@@ -40,14 +40,17 @@ const CategoryWrap = styled.div`
 const CategoryContainer = styled.ul`
   display: flex;
   align-items: center;
-  max-width: 1000px;
+  max-width: 90vw;
   height: 50px;
   margin: 0 auto;
 `;
 
 const CategoryItem = styled.li`
   cursor: pointer;
-  margin-left: 3vw;
+
+  & + li {
+    margin-left: 10px;
+  }
 `;
 
 const ClickedCategoryItem = styled(CategoryItem)`
