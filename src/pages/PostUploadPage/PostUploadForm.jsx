@@ -213,7 +213,7 @@ const PostUploadWrap = styled.main`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 95vw;
+  width: 90vw;
 
   input {
     border: 1px solid ${PALLETS.LIGHT_GRAY};

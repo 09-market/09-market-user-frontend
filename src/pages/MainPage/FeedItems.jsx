@@ -10,9 +10,12 @@ export default function FeedItems({ currentCategory }) {
 
   const [itemsData, setItemsData] = useState([]);
 
-  const getFeedItems = async () => {
+  const getFeedItems = async (currentCategory) => {
+    const url =
+      currentCategory === '전체' ? '/item' : `/item/${currentCategory}`;
+
     await axios
-      .get(`/item`)
+      .get(url)
       .then((res) => {
         setItemsData(res.data);
       })
@@ -20,8 +23,8 @@ export default function FeedItems({ currentCategory }) {
   };
 
   useEffect(() => {
-    getFeedItems();
-  }, []);
+    getFeedItems(currentCategory);
+  }, [currentCategory]);
 
   if (itemsData.length > 0)
     return (

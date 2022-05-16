@@ -55,11 +55,10 @@ const SearchButton = styled.button`
 
 const SearchInput = styled.input`
   box-sizing: border-box;
-  width: calc(90vw - 80px);
   margin: 0 10px;
   padding: 5px 0 5px 10px;
   border-radius: 5px;
-  animation: searchBar 0.3s ease-out;
+  animation: searchBar 0.3s ease-out forwards;
 
   @keyframes searchBar {
     0% {

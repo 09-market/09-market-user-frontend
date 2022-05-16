@@ -33,7 +33,7 @@ const GoBackHeaderWrap = styled.header`
 
 const GoBackHeaderItems = styled.div`
   position: relative;
-  max-width: 1000px;
+  max-width: 90vw;
   height: 70px;
   margin: 0 auto;
   display: flex;

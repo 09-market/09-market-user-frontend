@@ -30,7 +30,8 @@ export default function FeedInfo() {
 }
 
 const FeedInfoWrap = styled.section`
-  padding: 5px;
+  max-width: 90vw;
+  margin: 5px auto 5px;
 `;
 
 const PostsContainer = styled.ul`

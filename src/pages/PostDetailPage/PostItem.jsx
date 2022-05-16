@@ -20,16 +20,20 @@ export default function PostItem() {
 
   return (
     <PostItemWrap>
-      <PostAuthorWrap>
+      <PostAuthorWrap to="">
         <AuthorImage src="" alt="" />
         <AuthorName></AuthorName>
       </PostAuthorWrap>
-      <ItemImage src="/images/example_1.jpg" alt="" />
-      <InstagramLink to="">Instagram 이동하기 {'>'}</InstagramLink>
       <ItemTitle></ItemTitle>
+      <ItemImage src="/images/example_1.jpg" alt="" />
       <ItemInfoWrap>
-        <ItemLike></ItemLike>
-        <ItemComment></ItemComment>
+        <LikeAndComment>
+          <Like></Like>
+          <Comment></Comment>
+        </LikeAndComment>
+        <InstagramLink href="" target="_blank">
+          Instagram 이동하기 {'>'}
+        </InstagramLink>
       </ItemInfoWrap>
     </PostItemWrap>
   );
@@ -39,33 +43,42 @@ const PostItemWrap = styled.main`
   display: flex;
   flex-direction: column;
   margin: 80px auto 0;
-  width: 95vw;
+  max-width: 90vw;
 `;
 
-const PostAuthorWrap = styled.div``;
+const PostAuthorWrap = styled(Link)`
+  display: flex;
+  align-items: center;
+  height: 50px;
+`;
 
 const AuthorImage = styled.img``;
 
 const AuthorName = styled.p``;
+
+const ItemTitle = styled.h2``;
 
 const ItemImage = styled.img`
   position: relative;
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 5px;
+  margin-bottom: 10px;
 
   @media screen and (min-width: 420px) {
     height: 500px;
   }
 `;
 
-const InstagramLink = styled(Link)``;
+const InstagramLink = styled.a``;
 
-const ItemTitle = styled.h2``;
+const ItemInfoWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
-const ItemInfoWrap = styled.div``;
+const LikeAndComment = styled.div``;
 
-const ItemLike = styled.p``;
+const Like = styled.p``;
 
-const ItemComment = styled.p``;
+const Comment = styled.p``;

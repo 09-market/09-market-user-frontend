@@ -148,7 +148,7 @@ export default function PersonalInformation({ userData, handleUserData }) {
 
 const SignUpPageWrap = styled.main`
   height: 100vh;
-  max-width: 1000px;
+  max-width: 90vw;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
