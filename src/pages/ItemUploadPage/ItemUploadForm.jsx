@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { PALLETS } from 'utils/constants';
 import axios from '../../api/axios';
 
-export default function PostUploadForm() {
+export default function ItemUploadForm() {
   const navigate = useNavigate();
 
   const [inputImgUrl, setInputImgUrl] = useState('');
@@ -17,14 +17,12 @@ export default function PostUploadForm() {
   const [inputUrl, setInputCategory] = useState('');
 
   const [postData, setPostData] = useState({
-    file: '',
-    itemDto: {
-      name: '',
-      itemInfo: '',
-      price: 0,
-      amount: 0,
-      category: '',
-    },
+    name: '',
+    itemInfo: '',
+    price: 0,
+    amount: 0,
+    category: '',
+    instagramUrl: '',
   });
 
   const [disabledBtn, setDisabledBtn] = useState(true);
@@ -56,8 +54,6 @@ export default function PostUploadForm() {
   };
 
   const handleInputImg = (e) => {
-    setInputImgUrl(e.target.files);
-    handleUserData('file', e.target.value);
     encodeFileToBase64(e.target.files[0]);
   };
 
@@ -67,6 +63,7 @@ export default function PostUploadForm() {
     return new Promise((resolve) => {
       reader.onload = () => {
         setInputImgUrl(reader.result);
+        handleUserData('file', reader.result);
         resolve();
       };
     });
@@ -134,7 +131,7 @@ export default function PostUploadForm() {
             accept="image/*"
             onChange={handleInputImg}
           />
-          {inputImgUrl.length === 0 && '이미지 업로드'}
+          {inputImgUrl.length === 0 && '+'}
         </ImgUpload>
         <label htmlFor="inpName">상품명</label>
         <input
@@ -181,7 +178,7 @@ export default function PostUploadForm() {
           value={inputCategory}
           onChange={handleInputCategory}
         />
-        <label htmlFor="inpUrl">URL</label>
+        <label htmlFor="inpUrl">Instgram URL</label>
         <input
           type="text"
           placeholder="URL 입력"
@@ -213,7 +210,7 @@ const PostUploadWrap = styled.main`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 90vw;
+  width: 95vw;
 
   input {
     border: 1px solid ${PALLETS.LIGHT_GRAY};
@@ -231,9 +228,10 @@ const ImgUpload = styled.label`
   justify-content: center;
   align-items: center;
   color: ${PALLETS.WHITE};
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 250px;
   margin: 0 auto 20px !important;
+  font-size: 3rem;
 
   ${(props) =>
     props.itemImgUrl.length > 0
@@ -241,6 +239,10 @@ const ImgUpload = styled.label`
       : `background-color : ${PALLETS.PURPLE};`}
   background-size: cover;
   border-radius: 5px;
+
+  @media screen and (min-width: 420px) {
+    height: 500px;
+  }
 `;
 
 const UploadButton = styled.button`

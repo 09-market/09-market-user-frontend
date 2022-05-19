@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import UserInfo from './UserInfo';
-import PostsInfo from './PostsInfo';
+import ItemsInfo from './ItemsInfo';
 
 import { isLogined } from 'utils/isLogined';
 
@@ -11,7 +11,7 @@ export default function ProfilePage() {
     return (
       <>
         <UserInfo />
-        <PostsInfo />
+        <ItemsInfo />
       </>
     );
   } else {

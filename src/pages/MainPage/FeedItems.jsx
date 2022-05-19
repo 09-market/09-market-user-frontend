@@ -8,36 +8,58 @@ import axios from '../../api/axios';
 export default function FeedItems({ currentCategory }) {
   const navigate = useNavigate();
 
-  const [itemsData, setItemsData] = useState([]);
+  const [itemsData, setItemsData] = useState([
+    {
+      itemId: 1,
+      itemImageUrl: '/images/example_1.jpg',
+      name: '예시',
+      likes: 100,
+      comments: 100,
+    },
+    {
+      itemId: 2,
+      itemImageUrl: '/images/example_2.jpg',
+      name: '예시',
+      likes: 1000,
+      comments: 1000,
+    },
+    {
+      itemId: 3,
+      itemImageUrl: '/images/example_3.jpg',
+      name: '예시',
+      likes: 10000,
+      comments: 10000,
+    },
+  ]);
 
-  const getFeedItems = async (currentCategory) => {
-    const url =
-      currentCategory === '전체' ? '/item' : `/item/${currentCategory}`;
+  // const getFeedItems = async (currentCategory) => {
+  //   const url =
+  //     currentCategory === '전체' ? '/item' : `/item/${currentCategory}`;
 
-    await axios
-      .get(url)
-      .then((res) => {
-        setItemsData(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
+  //   await axios
+  //     .get(url)
+  //     .then((res) => {
+  //       setItemsData(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-  useEffect(() => {
-    getFeedItems(currentCategory);
-  }, [currentCategory]);
+  // useEffect(() => {
+  //   getFeedItems(currentCategory);
+  // }, [currentCategory]);
 
-  if (itemsData.length > 0)
+  if (itemsData.length >= 0)
     return (
       <>
         <h2 className="blind">{currentCategory} 카테고리 게시글</h2>
         <PostsWrap>
           {itemsData.map((item) => (
             <PostItem
-              onClick={() => navigate(`/post/detail/${item.itemId}`)}
+              onClick={() => navigate(`/item/detail/${item.itemId}`)}
               key={item.itemId}
             >
               <ItemImageWrap>
-                <ItemImage src={item.itemImageUrl} alt={item.itemName} />
+                <ItemImage src={item.itemImageUrl} alt={item.name} />
                 <ItemBackground />
               </ItemImageWrap>
               <ItemInfo>
@@ -119,7 +141,7 @@ const ItemLike = styled.p`
     background-image: url('/images/like.png');
     background-size: cover;
     position: absolute;
-    left: -90%;
+    left: -20px;
     top: 0;
   }
 `;

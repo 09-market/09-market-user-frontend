@@ -43,7 +43,7 @@ const GoBackHeaderItems = styled.div`
 
 const GoBackButton = styled.button`
   position: absolute;
-  left: 20px;
+  left: 0;
   font-size: 1.5rem;
   color: ${PALLETS.BLACK};
 

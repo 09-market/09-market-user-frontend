@@ -16,8 +16,8 @@ export default function Nav() {
           </Link>
         </NavItem>
         <NavItem>
-          <Link to="/post/upload" className="link-upload">
-            <span className="blind">게시글 업로드 페이지로 이동</span>
+          <Link to="/item/upload" className="link-upload">
+            <span className="blind">아이템 업로드 페이지로 이동</span>
           </Link>
         </NavItem>
         <NavItem>

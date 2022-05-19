@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import axios from '../../api/axios';
 
-export default function PostItem() {
+export default function Item() {
   const postId = useParams().postId;
   const [itemData, setItemData] = useState({});
 
-  const getPostItem = async () => {
+  const getItem = async () => {
     await axios
       .get(`api/item/${postId}`)
       .then((res) => {
@@ -31,7 +31,7 @@ export default function PostItem() {
           <Like></Like>
           <Comment></Comment>
         </LikeAndComment>
-        <InstagramLink href="" target="_blank">
+        <InstagramLink href="https://www.instagram.com/" target="_blank">
           Instagram 이동하기 {'>'}
         </InstagramLink>
       </ItemInfoWrap>
@@ -43,7 +43,7 @@ const PostItemWrap = styled.main`
   display: flex;
   flex-direction: column;
   margin: 80px auto 0;
-  max-width: 90vw;
+  max-width: 95vw;
 `;
 
 const PostAuthorWrap = styled(Link)`
@@ -64,6 +64,7 @@ const ItemImage = styled.img`
   height: 250px;
   object-fit: cover;
   margin-bottom: 10px;
+  border-radius: 5px;
 
   @media screen and (min-width: 420px) {
     height: 500px;

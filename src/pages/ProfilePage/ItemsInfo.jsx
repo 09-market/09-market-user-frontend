@@ -30,7 +30,7 @@ export default function FeedInfo() {
 }
 
 const FeedInfoWrap = styled.section`
-  max-width: 90vw;
+  max-width: 95vw;
   margin: 5px auto 5px;
 `;
 

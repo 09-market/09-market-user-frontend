@@ -7,9 +7,9 @@ import SplashPage from 'pages/SplashPage';
 import MainPage from './pages/MainPage';
 import ProfilePage from './pages/ProfilePage';
 import ProfileModifyPage from './pages/ProfileModifyPage';
-import PostDetailPage from './pages/PostDetailPage';
+import PostDetailPage from './pages/ItemDetailPage';
 import SearchPage from 'pages/SeacrhPage';
-import PostUploadPage from 'pages/PostUploadPage';
+import ItemUploadPage from 'pages/ItemUploadPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -37,8 +37,8 @@ function App() {
         </Route>
 
         <Route path="/profile/modify" element={<ProfileModifyPage />} />
-        <Route path="/post/upload" element={<PostUploadPage />} />
-        <Route path="/post/detail/:postId" element={<PostDetailPage />} />
+        <Route path="/item/upload" element={<ItemUploadPage />} />
+        <Route path="/item/detail/:postId" element={<PostDetailPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
