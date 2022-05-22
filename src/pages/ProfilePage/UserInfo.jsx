@@ -21,6 +21,7 @@ export default function UserInfo() {
       .then((res) => {
         setLoading(false);
         setUserData(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         if (err.response.status !== 200) {

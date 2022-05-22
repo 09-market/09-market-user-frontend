@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { defaultAxios } from 'utils/axiosFunc';
 import { isLogined } from 'utils/isLogined';
 
 import GoBackHeader from 'components/GoBackHeader';
