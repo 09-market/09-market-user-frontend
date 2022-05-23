@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import { PALLETS } from 'utils/constants';
 
-export default function SearchResult({}) {
+export default function SearchResult({ inpKeyword }) {
   const navigate = useNavigate();
+
+  const [itemsData, setItemsData] = useState([
+    {
+      itemId: 1,
+      itemImageUrl: '/images/example_1.jpg',
+      name: '예시',
+      likes: 100,
+      comments: 100,
+    },
+  ]);
 
   return (
     <SearchResultWrap>
       <h2 className="blind">검색 결과</h2>
       <PostsWrap>
-        {/* {itemsData.map((item) => (
+        {itemsData.map((item) => (
           <PostItem
             onClick={() => navigate(`/item/detail/${item.itemId}`)}
             key={item.itemId}
@@ -31,7 +41,7 @@ export default function SearchResult({}) {
               </ItemComment>
             </ItemInfo>
           </PostItem>
-        ))} */}
+        ))}
       </PostsWrap>
     </SearchResultWrap>
   );

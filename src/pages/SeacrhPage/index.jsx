@@ -8,8 +8,8 @@ export default function SearchPage() {
 
   return (
     <>
-      <SearchHeader />
-      <SearchResult />
+      <SearchHeader inpKeyword={inpKeyword} setInpKeyword={setInpKeyword} />
+      <SearchResult inpKeyword={inpKeyword} />
     </>
   );
 }

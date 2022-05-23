@@ -4,8 +4,12 @@ import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 
-export default function SearchHeader() {
+export default function SearchHeader({ inpKeyword, setInpKeyword }) {
   const navigate = useNavigate();
+
+  const handleInputKeyword = (e) => {
+    setInpKeyword(e.target.value);
+  };
 
   return (
     <SearchHeaderWrap>
@@ -14,7 +18,13 @@ export default function SearchHeader() {
         <SearchButton>
           <span className="blind">검색 버튼</span>
         </SearchButton>
-        <SearchInput type="text" autoFocus placeholder="검색어를 입력하세요." />
+        <SearchInput
+          type="text"
+          value={inpKeyword}
+          autoFocus
+          placeholder="검색어를 입력하세요."
+          onChange={handleInputKeyword}
+        />
         <CancelButton
           type="button"
           onClick={() => {
