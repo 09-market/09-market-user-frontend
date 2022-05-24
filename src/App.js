@@ -7,7 +7,7 @@ import SplashPage from 'pages/SplashPage';
 import MainPage from './pages/MainPage';
 import ProfilePage from './pages/ProfilePage';
 import ProfileModifyPage from './pages/ProfileModifyPage';
-import PostDetailPage from './pages/ItemDetailPage';
+import ItemDetailPage from './pages/ItemDetailPage';
 import SearchPage from 'pages/SeacrhPage';
 import ItemUploadPage from 'pages/ItemUploadPage';
 import SignInPage from './pages/SignInPage';
@@ -38,7 +38,7 @@ function App() {
 
         <Route path="/profile/modify" element={<ProfileModifyPage />} />
         <Route path="/item/upload" element={<ItemUploadPage />} />
-        <Route path="/item/detail/:postId" element={<PostDetailPage />} />
+        <Route path="/item/detail/:itemId" element={<ItemDetailPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />

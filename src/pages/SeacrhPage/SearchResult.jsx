@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { PALLETS } from 'utils/constants';
 
 export default function SearchResult({ inpKeyword }) {
-  const navigate = useNavigate();
-
   const [itemsData, setItemsData] = useState([
     {
       itemId: 1,
@@ -22,24 +20,23 @@ export default function SearchResult({ inpKeyword }) {
       <h2 className="blind">검색 결과</h2>
       <PostsWrap>
         {itemsData.map((item) => (
-          <PostItem
-            onClick={() => navigate(`/item/detail/${item.itemId}`)}
-            key={item.itemId}
-          >
-            <ItemImageWrap>
-              <ItemImage src={item.itemImageUrl} alt={item.name} />
-              <ItemBackground />
-            </ItemImageWrap>
-            <ItemInfo>
-              <ItemLike>
-                <span className="blind">좋아요 수</span>
-                {item.likes}
-              </ItemLike>
-              <ItemComment>
-                <span className="blind">댓글 수</span>
-                {item.comments}
-              </ItemComment>
-            </ItemInfo>
+          <PostItem key={item.itemId}>
+            <Link to={`/item/detail/${item.itemId}`}>
+              <ItemImageWrap>
+                <ItemImage src={item.itemImageUrl} alt={item.name} />
+                <ItemBackground />
+              </ItemImageWrap>
+              <ItemInfo>
+                <ItemLike>
+                  <span className="blind">좋아요 수</span>
+                  {item.likes}
+                </ItemLike>
+                <ItemComment>
+                  <span className="blind">댓글 수</span>
+                  {item.comments}
+                </ItemComment>
+              </ItemInfo>
+            </Link>
           </PostItem>
         ))}
       </PostsWrap>

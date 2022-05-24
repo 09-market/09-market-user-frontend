@@ -5,14 +5,13 @@ import styled from 'styled-components';
 import axios from '../../api/axios';
 
 export default function Item() {
-  const postId = useParams().postId;
+  const itemid = useParams().itemid;
   const [itemData, setItemData] = useState({});
 
   const getItem = async () => {
     await axios
-      .get(`api/item/${postId}`)
+      .get(`api/item/${itemid}`)
       .then((res) => {
-        console.log(res);
         setItemData(res.data);
       })
       .catch((err) => console.log(err));

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 import axios from '../../api/axios';
 
 export default function FeedItems({ currentCategory }) {
-  const navigate = useNavigate();
-
   const [itemsData, setItemsData] = useState([
     {
       itemId: 1,
@@ -54,24 +52,23 @@ export default function FeedItems({ currentCategory }) {
         <h2 className="blind">{currentCategory} 카테고리 게시글</h2>
         <PostsWrap>
           {itemsData.map((item) => (
-            <PostItem
-              onClick={() => navigate(`/item/detail/${item.itemId}`)}
-              key={item.itemId}
-            >
-              <ItemImageWrap>
-                <ItemImage src={item.itemImageUrl} alt={item.name} />
-                <ItemBackground />
-              </ItemImageWrap>
-              <ItemInfo>
-                <ItemLike>
-                  <span className="blind">좋아요 수</span>
-                  {item.likes}
-                </ItemLike>
-                <ItemComment>
-                  <span className="blind">댓글 수</span>
-                  {item.comments}
-                </ItemComment>
-              </ItemInfo>
+            <PostItem key={item.itemId}>
+              <Link to={`/item/detail/${item.itemId}`}>
+                <ItemImageWrap>
+                  <ItemImage src={item.itemImageUrl} alt={item.name} />
+                  <ItemBackground />
+                </ItemImageWrap>
+                <ItemInfo>
+                  <ItemLike>
+                    <span className="blind">좋아요 수</span>
+                    {item.likes}
+                  </ItemLike>
+                  <ItemComment>
+                    <span className="blind">댓글 수</span>
+                    {item.comments}
+                  </ItemComment>
+                </ItemInfo>
+              </Link>
             </PostItem>
           ))}
         </PostsWrap>
@@ -141,8 +138,7 @@ const ItemLike = styled.p`
     background-image: url('/images/like.png');
     background-size: cover;
     position: absolute;
-    left: -20px;
-    top: 0;
+    left: -25px;
   }
 `;
 
