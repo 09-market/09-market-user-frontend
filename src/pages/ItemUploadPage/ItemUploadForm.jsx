@@ -13,17 +13,10 @@ export default function ItemUploadForm() {
   const [inputInfo, setInputInfo] = useState('');
   const [inputPrice, setInputPrice] = useState(0);
   const [inputAmount, setInputAmount] = useState(0);
-  const [inputCategory, setInputUrl] = useState('');
-  const [inputUrl, setInputCategory] = useState('');
+  const [inputCategory, setInputCategory] = useState('');
+  const [inputUrl, setInputUrl] = useState('');
 
-  const [postData, setPostData] = useState({
-    name: '',
-    itemInfo: '',
-    price: 0,
-    amount: 0,
-    category: '',
-    instagramUrl: '',
-  });
+  const [postData, setPostData] = useState({});
 
   const [disabledBtn, setDisabledBtn] = useState(true);
 
@@ -34,7 +27,8 @@ export default function ItemUploadForm() {
       inputInfo.length > 0 &&
       inputPrice > 0 &&
       inputAmount > 0 &&
-      inputCategory.length > 0
+      inputCategory.length > 0 &&
+      inputUrl.length > 0
     ) {
       setDisabledBtn(false);
     } else {
@@ -47,6 +41,7 @@ export default function ItemUploadForm() {
     inputPrice,
     inputAmount,
     inputCategory,
+    inputUrl,
   ]);
 
   const handleUserData = (key, value) => {
@@ -63,7 +58,7 @@ export default function ItemUploadForm() {
     return new Promise((resolve) => {
       reader.onload = () => {
         setInputImgUrl(reader.result);
-        handleUserData('file', reader.result);
+        handleUserData('itemImageUrl', reader.result);
         resolve();
       };
     });
@@ -71,49 +66,53 @@ export default function ItemUploadForm() {
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
-    handleUserData('itemDto', { name: e.target.value });
+    handleUserData('name', e.target.value);
   };
 
   const handleInputInfo = (e) => {
     setInputInfo(e.target.value);
-    handleUserData('itemDto', { itemInfo: e.target.value });
+    handleUserData('itemInfo', e.target.value);
   };
 
   const handleInputPrice = (e) => {
     setInputPrice(e.target.value);
-    handleUserData('itemDto', { price: e.target.value });
+    handleUserData('price', e.target.value);
   };
 
   const handleInputAmount = (e) => {
     setInputAmount(e.target.value);
-    handleUserData('itemDto', { amount: e.target.value });
+    handleUserData('amount', e.target.value);
   };
 
   const handleInputCategory = (e) => {
     setInputCategory(e.target.value);
-    handleUserData('itemDto', { category: e.target.value });
+    handleUserData('category', e.target.value);
   };
 
   const handleInputUrl = (e) => {
     setInputUrl(e.target.value);
-    handleUserData('itemDto', { url: e.target.value });
+    handleUserData('instagramUrl', e.target.value);
   };
 
   const handleUploadBtn = (postData) => {
-    const data = {
-      file: postData.file,
-      itemDto: {
-        name: postData.itemDto.name,
-        itemInfo: postData.itemDto.itemInfo,
-        price: postData.itemDto.price,
-        amount: postData.itemDto.amount,
-        category: postData.itemDto.category,
+    const userToken = localStorage.getItem('token');
+
+    const config = {
+      data: {
+        itemImgUrl: postData.itemImgUrl,
+        name: postData.name,
+        itemInfo: postData.itemInfo,
+        price: postData.price,
+        amount: postData.amount,
+        category: postData.category,
+        instagramUrl: postData.instagramUrl,
       },
+      headers: { Authorization: `Bearer ${userToken}` },
     };
     axios
-      .post(`/api/feed`, data)
+      .post(`/item`, config)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         navigate('/');
       })
       .catch((err) => {
@@ -191,7 +190,7 @@ export default function ItemUploadForm() {
       <UploadButton
         type="button"
         disabled={disabledBtn}
-        onClick={() => handleUploadBtn()}
+        onClick={() => handleUploadBtn(postData)}
       >
         게시하기
       </UploadButton>
