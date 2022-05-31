@@ -58,7 +58,7 @@ export default function ItemUploadForm() {
     return new Promise((resolve) => {
       reader.onload = () => {
         setInputImgUrl(reader.result);
-        handleUserData('itemImageUrl', reader.result);
+        handleUserData('itemImgUrl', reader.result);
         resolve();
       };
     });
@@ -106,9 +106,11 @@ export default function ItemUploadForm() {
         amount: postData.amount,
         category: postData.category,
         instagramUrl: postData.instagramUrl,
+        itemImageName: postData.name,
       },
       headers: { Authorization: `Bearer ${userToken}` },
     };
+    console.log(config);
     axios
       .post(`/item`, config)
       .then((res) => {
