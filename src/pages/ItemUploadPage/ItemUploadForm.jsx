@@ -97,7 +97,7 @@ export default function ItemUploadForm() {
   const handleUploadBtn = (postData) => {
     const userToken = localStorage.getItem('token');
 
-    const config = {
+    const body = {
       data: {
         itemImgUrl: postData.itemImgUrl,
         name: postData.name,
@@ -108,11 +108,14 @@ export default function ItemUploadForm() {
         instagramUrl: postData.instagramUrl,
         itemImageName: postData.name,
       },
-      headers: { Authorization: `Bearer ${userToken}` },
     };
-    console.log(config);
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
     axios
-      .post(`/item`, config)
+      .post(`/item`, body, { headers })
       .then((res) => {
         console.log(res.data);
         navigate('/');
