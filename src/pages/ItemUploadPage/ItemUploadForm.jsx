@@ -58,7 +58,10 @@ export default function ItemUploadForm() {
     return new Promise((resolve) => {
       reader.onload = () => {
         setInputImgUrl(reader.result);
-        handleUserData('itemImgUrl', reader.result);
+        handleUserData(
+          'itemImgUrl',
+          reader.result.replace(/^data:image\/[a-z]+;base64,/, '')
+        );
         resolve();
       };
     });
@@ -114,6 +117,7 @@ export default function ItemUploadForm() {
         Authorization: `Bearer ${userToken}`,
       },
     };
+    console.log(body);
     axios
       .post(`/item`, body, { headers })
       .then((res) => {
