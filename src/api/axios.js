@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://minahplayground.com/api',
+  baseURL: 'https://gonggu-market.shop/',
   headers: {
     'Content-type': 'application/json',
   },
