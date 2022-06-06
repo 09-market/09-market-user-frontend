@@ -59,7 +59,7 @@ export default function ItemUploadForm() {
       reader.onload = () => {
         setInputImgUrl(reader.result);
         handleUserData(
-          'itemImgUrl',
+          'itemImageUrl',
           reader.result.replace(/^data:image\/[a-z]+;base64,/, '')
         );
         resolve();
@@ -79,12 +79,12 @@ export default function ItemUploadForm() {
 
   const handleInputPrice = (e) => {
     setInputPrice(e.target.value);
-    handleUserData('price', e.target.value);
+    handleUserData('price', parseInt(e.target.value, 10));
   };
 
   const handleInputAmount = (e) => {
     setInputAmount(e.target.value);
-    handleUserData('amount', e.target.value);
+    handleUserData('amount', parseInt(e.target.value, 10));
   };
 
   const handleInputCategory = (e) => {
@@ -99,29 +99,14 @@ export default function ItemUploadForm() {
 
   const handleUploadBtn = (postData) => {
     const userToken = localStorage.getItem('token');
-
-    const body = {
-      data: {
-        itemImgUrl: postData.itemImgUrl,
-        name: postData.name,
-        itemInfo: postData.itemInfo,
-        price: postData.price,
-        amount: postData.amount,
-        category: postData.category,
-        instagramUrl: postData.instagramUrl,
-        itemImageName: postData.name,
-      },
-    };
+    const data = postData;
     const headers = {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
+      Authorization: `Bearer ${userToken}`,
     };
-    console.log(body);
+
     axios
-      .post(`/item`, body, { headers })
+      .post(`/item`, data, { headers })
       .then((res) => {
-        console.log(res.data);
         navigate('/');
       })
       .catch((err) => {
