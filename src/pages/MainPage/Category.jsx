@@ -6,7 +6,9 @@ export default function Category({ currentCategory, setCurrentCategory }) {
   const categoryData = ['전체', '화장품'];
 
   const handleCategory = (e) => {
-    setCurrentCategory(e.target.innerText);
+    if (currentCategory !== e.target.innerText) {
+      setCurrentCategory(e.target.innerText);
+    }
   };
 
   return (

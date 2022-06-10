@@ -6,45 +6,27 @@ import { PALLETS } from 'utils/constants';
 import axios from '../../api/axios';
 
 export default function FeedItems({ currentCategory }) {
-  const [itemsData, setItemsData] = useState([
-    {
-      itemId: 1,
-      itemImageUrl: '/images/example_1.jpg',
-      name: '예시',
-      likes: 100,
-      comments: 100,
-    },
-    {
-      itemId: 2,
-      itemImageUrl: '/images/example_2.jpg',
-      name: '예시',
-      likes: 1000,
-      comments: 1000,
-    },
-    {
-      itemId: 3,
-      itemImageUrl: '/images/example_3.jpg',
-      name: '예시',
-      likes: 10000,
-      comments: 10000,
-    },
-  ]);
+  const [itemsData, setItemsData] = useState([]);
 
-  // const getFeedItems = async (currentCategory) => {
-  //   const url =
-  //     currentCategory === '전체' ? '/item' : `/item/${currentCategory}`;
+  const getFeedItems = async (currentCategory) => {
+    const url =
+      (await currentCategory) === '전체' ? '/item' : `/item/${currentCategory}`;
 
-  //   await axios
-  //     .get(url)
-  //     .then((res) => {
-  //       setItemsData(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+    await axios
+      .get(url)
+      .then((res) => {
+        setItemsData(res.data.reverse());
+      })
+      .catch((err) => console.log(err));
+  };
 
-  // useEffect(() => {
-  //   getFeedItems(currentCategory);
-  // }, [currentCategory]);
+  useEffect(() => {
+    getFeedItems(currentCategory);
+  }, [currentCategory]);
+
+  const imgUrlSrc = (url) => {
+    return 'data:image/jpeg;base64,'.concat(url);
+  };
 
   if (itemsData.length >= 0)
     return (
@@ -55,7 +37,10 @@ export default function FeedItems({ currentCategory }) {
             <PostItem key={item.itemId}>
               <Link to={`/item/detail/${item.itemId}`}>
                 <ItemImageWrap>
-                  <ItemImage src={item.itemImageUrl} alt={item.name} />
+                  <ItemImage
+                    src={imgUrlSrc(item.itemImageUrl)}
+                    alt={item.name}
+                  />
                   <ItemBackground />
                 </ItemImageWrap>
                 <ItemInfo>
