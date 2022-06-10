@@ -1,14 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import GoBackHeader from 'components/GoBackHeader';
-import Item from './Item';
+import ItemData from './ItemData';
+import InputComment from './InputComment';
 
 export default function ItemDetailPage() {
   return (
     <>
       <GoBackHeader headerTitle="상품" />
-      <Item />
+      <ItemData />
+      <InputComment />
     </>
   );
 }

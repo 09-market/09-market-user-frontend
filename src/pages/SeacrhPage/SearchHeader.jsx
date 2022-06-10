@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 
-export default function SearchHeader({ inpKeyword, setInpKeyword }) {
+export default function SearchHeader() {
   const navigate = useNavigate();
+
+  const [inpKeyword, setInpKeyword] = useState('');
 
   const handleInputKeyword = (e) => {
     setInpKeyword(e.target.value);
+    navigate(`/search?q=${e.target.value}`);
   };
 
   return (
@@ -28,7 +31,7 @@ export default function SearchHeader({ inpKeyword, setInpKeyword }) {
         <CancelButton
           type="button"
           onClick={() => {
-            navigate(-1);
+            navigate('/');
           }}
         >
           취소

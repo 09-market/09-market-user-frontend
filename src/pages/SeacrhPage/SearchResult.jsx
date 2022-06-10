@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
+import axios from '../../api/axios';
 import { PALLETS } from 'utils/constants';
+import { useDebounce } from 'hooks/useDebounce';
+import { setImgSrc } from 'utils/setImgSrc';
 
-export default function SearchResult({ inpKeyword }) {
-  const [itemsData, setItemsData] = useState([
-    {
-      itemId: 1,
-      itemImageUrl: '/images/example_1.jpg',
-      name: '예시',
-      likes: 100,
-      comments: 100,
-    },
-  ]);
+export default function SearchResult() {
+  const [itemsData, setItemsData] = useState([]);
+
+  const searchQuery = new URLSearchParams(useLocation().search);
+  const searchKeyword = useDebounce(searchQuery.get('q'), 300);
+
+  const getSeacrhItem = async (keyword) => {
+    await axios
+      .get(`/item/search/${keyword}`)
+      .then((res) => {
+        setItemsData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getSeacrhItem(searchKeyword);
+  }, [searchKeyword]);
 
   return (
     <SearchResultWrap>
@@ -23,7 +35,7 @@ export default function SearchResult({ inpKeyword }) {
           <PostItem key={item.itemId}>
             <Link to={`/item/detail/${item.itemId}`}>
               <ItemImageWrap>
-                <ItemImage src={item.itemImageUrl} alt={item.name} />
+                <ItemImage src={setImgSrc(item.itemImageUrl)} alt={item.name} />
                 <ItemBackground />
               </ItemImageWrap>
               <ItemInfo>
@@ -33,7 +45,7 @@ export default function SearchResult({ inpKeyword }) {
                 </ItemLike>
                 <ItemComment>
                   <span className="blind">댓글 수</span>
-                  {item.comments}
+                  {item.comments.length}
                 </ItemComment>
               </ItemInfo>
             </Link>

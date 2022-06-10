@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { PALLETS } from 'utils/constants';
 import axios from '../../api/axios';
+import { PALLETS } from 'utils/constants';
+import { setImgSrc } from 'utils/setImgSrc';
+
+import FeedLoading from './FeedLoading';
 
 export default function FeedItems({ currentCategory }) {
   const [itemsData, setItemsData] = useState([]);
@@ -24,11 +27,7 @@ export default function FeedItems({ currentCategory }) {
     getFeedItems(currentCategory);
   }, [currentCategory]);
 
-  const imgUrlSrc = (url) => {
-    return 'data:image/jpeg;base64,'.concat(url);
-  };
-
-  if (itemsData.length >= 0)
+  if (itemsData.length > 0)
     return (
       <>
         <h2 className="blind">{currentCategory} 카테고리 게시글</h2>
@@ -38,7 +37,7 @@ export default function FeedItems({ currentCategory }) {
               <Link to={`/item/detail/${item.itemId}`}>
                 <ItemImageWrap>
                   <ItemImage
-                    src={imgUrlSrc(item.itemImageUrl)}
+                    src={setImgSrc(item.itemImageUrl)}
                     alt={item.name}
                   />
                   <ItemBackground />
@@ -59,7 +58,7 @@ export default function FeedItems({ currentCategory }) {
         </PostsWrap>
       </>
     );
-  else return <NotExist>등록된 상품이 없습니다.</NotExist>;
+  else return <FeedLoading>등록된 상품이 없습니다.</FeedLoading>;
 }
 
 const PostsWrap = styled.ul`
@@ -75,7 +74,13 @@ const PostItem = styled.li`
   margin-top: 2.5vw;
 `;
 
-const ItemImageWrap = styled.div``;
+const ItemImageWrap = styled.div`
+  height: 250px;
+
+  @media screen and (min-width: 420px) {
+    height: 500px;
+  }
+`;
 
 const ItemImage = styled.img`
   position: relative;
@@ -90,14 +95,19 @@ const ItemImage = styled.img`
 `;
 
 const ItemBackground = styled.div`
-  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   content: '';
   width: 100%;
-  height: 50px;
-  background-image: linear-gradient(to top, ${PALLETS.BLACK}, rgba(0, 0, 0, 0));
-  position: absolute;
-  bottom: 4px;
-  left: 0;
+  height: 100px;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0)
+  );
+
   border-radius: 0 0 5px 5px;
 `;
 
@@ -131,11 +141,4 @@ const ItemComment = styled(ItemLike)`
   &::before {
     background-image: url('/images/comment.png');
   }
-`;
-
-const NotExist = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 240px);
 `;
