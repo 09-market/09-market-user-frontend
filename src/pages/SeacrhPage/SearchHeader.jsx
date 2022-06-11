@@ -81,6 +81,10 @@ const SearchInput = styled.input`
       width: calc(90vw - 80px);
     }
   }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const CancelButton = styled.button`

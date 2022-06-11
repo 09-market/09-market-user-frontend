@@ -71,7 +71,7 @@ const PostItem = styled.li`
   cursor: pointer;
   position: relative;
   width: 95vw;
-  margin-top: 2.5vw;
+  margin-top: 3vw;
 `;
 
 const ItemImageWrap = styled.div`
@@ -119,7 +119,7 @@ const ItemInfo = styled.div`
   color: ${PALLETS.WHITE};
   width: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 const ItemLike = styled.p`
@@ -130,7 +130,7 @@ const ItemLike = styled.p`
     content: '';
     width: 1rem;
     height: 1rem;
-    background-image: url('/images/like.png');
+    background-image: url('/images/heart_white.png');
     background-size: cover;
     position: absolute;
     left: -25px;
@@ -139,6 +139,6 @@ const ItemLike = styled.p`
 
 const ItemComment = styled(ItemLike)`
   &::before {
-    background-image: url('/images/comment.png');
+    background-image: url('/images/comment_white.png');
   }
 `;

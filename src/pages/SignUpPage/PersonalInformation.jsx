@@ -123,6 +123,7 @@ export default function PersonalInformation({ userData, handleUserData }) {
             placeholder="우편번호 입력"
             required
             id="inpZipcode"
+            maxlength="5"
             value={inputZipcode}
             onChange={handleInputZipcode}
             className="mb-25"

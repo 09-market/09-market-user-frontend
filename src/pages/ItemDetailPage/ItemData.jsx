@@ -10,12 +10,21 @@ import ItemLoading from './ItemLoading';
 export default function ItemData() {
   const itemId = useParams().itemId;
   const [itemData, setItemData] = useState({});
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesNum, setLikesNum] = useState(0);
+  const [commentsNum, setCommentsNum] = useState(0);
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
 
   const getItem = useCallback(async () => {
     await axios
       .get(`/item/detail/${itemId}`)
       .then((res) => {
         setItemData(res.data);
+        setLikesNum(res.data.likes);
+        setCommentsNum(res.data.comments.length);
       })
       .catch((err) => console.log(err));
   }, [itemId]);
@@ -48,8 +57,14 @@ export default function ItemData() {
       <ItemImage src={setImgSrc(itemData.itemImageUrl)} alt={itemData.name} />
       <ItemInfoWrap>
         <LikeAndComment>
-          <Like>{itemData.likes}</Like>
-          <Comment>{itemData.comments.length}</Comment>
+          <Like isLiked={isLiked} onClick={toggleLike}>
+            <span className="blind">좋아요 수</span>
+            {likesNum}
+          </Like>
+          <Comment>
+            <span className="blind">댓글 수</span>
+            {commentsNum}
+          </Comment>
         </LikeAndComment>
         <InstagramLink href={itemData.instagramUrl} target="_blank">
           Instagram 이동하기 {'>'}
@@ -61,11 +76,13 @@ export default function ItemData() {
   );
 }
 
-const PostItemWrap = styled.main`
+const PostItemWrap = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 80px auto 0;
-  max-width: 95vw;
+  padding: 80px 2.5vw 10px;
+  // max-width: 95vw;
+  // padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const PostAuthorWrap = styled(Link)`
@@ -78,7 +95,12 @@ const AuthorImage = styled.img``;
 
 const AuthorName = styled.p``;
 
-const ItemTitle = styled.h2``;
+const ItemTitle = styled.h2`
+  margin-left: 0.5rem;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-family: 'GmarketSansBold';
+`;
 
 const ItemImage = styled.img`
   position: relative;
@@ -100,8 +122,44 @@ const ItemInfoWrap = styled.div`
   justify-content: space-between;
 `;
 
-const LikeAndComment = styled.div``;
+const LikeAndComment = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-const Like = styled.p``;
+const Like = styled.p`
+  position: relative;
+  margin-left: 2.5rem;
 
-const Comment = styled.p``;
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: -0.25rem;
+    left: -2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url('/images/heart_${(props) =>
+      props.isLiked ? 'red' : 'black'}.png');
+    background-size: cover;
+    ${(props) => props.isLiked && 'animation: liked .3s ease-in-out'};
+
+    @keyframes liked {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.3);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+`;
+
+const Comment = styled(Like)`
+  &:before {
+    background-image: url('/images/comment_black.png');
+  }
+`;

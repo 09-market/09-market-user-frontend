@@ -37,6 +37,7 @@ export default function SingInForm() {
     await axios
       .post('/auth/signin', data)
       .then((res) => {
+        console.log(res.data);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('userId', res.data.userId);
         navigate('/');
@@ -64,7 +65,6 @@ export default function SingInForm() {
         value={inputPw}
         onChange={handleInputPw}
       />
-      {/* <strong>{res.error}</strong> */}
       <SignInButton type="button" onClick={() => handleSignInBtn(userData)}>
         로그인
       </SignInButton>
