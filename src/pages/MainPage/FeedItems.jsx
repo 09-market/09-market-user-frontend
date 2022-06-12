@@ -72,6 +72,10 @@ const PostItem = styled.li`
   position: relative;
   width: 95vw;
   margin-top: 3vw;
+
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+  }
 `;
 
 const ItemImageWrap = styled.div`

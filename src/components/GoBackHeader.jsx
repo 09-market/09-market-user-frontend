@@ -39,6 +39,10 @@ const GoBackHeaderItems = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+  }
 `;
 
 const GoBackButton = styled.button`

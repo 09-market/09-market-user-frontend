@@ -14,10 +14,6 @@ export default function ItemData() {
   const [likesNum, setLikesNum] = useState(0);
   const [commentsNum, setCommentsNum] = useState(0);
 
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
-  };
-
   const getItem = useCallback(async () => {
     await axios
       .get(`/item/detail/${itemId}`)
@@ -28,61 +24,54 @@ export default function ItemData() {
       })
       .catch((err) => console.log(err));
   }, [itemId]);
-  /*
-  {
-    "itemId": 6,
-    "itemImageUrl": "",
-    "name": "테스트2",
-    "itemInfo": "테스트2",
-    "price": 2000,
-    "amount": 22,
-    "category": "기타",
-    "instagramUrl": "      },",
-    "likes": 0,
-    "comments": []
-}
-  */
+
+  const toggleLike = () => {
+    isLiked ? setLikesNum(likesNum - 1) : setLikesNum(likesNum + 1);
+    setIsLiked(!isLiked);
+  };
 
   useEffect(() => {
     getItem();
   }, [getItem]);
 
   return Object.keys(itemData).length > 0 ? (
-    <PostItemWrap>
-      <PostAuthorWrap to="">
-        <AuthorImage src="" alt="" />
-        <AuthorName></AuthorName>
-      </PostAuthorWrap>
-      <ItemTitle>{itemData.name}</ItemTitle>
-      <ItemImage src={setImgSrc(itemData.itemImageUrl)} alt={itemData.name} />
-      <ItemInfoWrap>
-        <LikeAndComment>
-          <Like isLiked={isLiked} onClick={toggleLike}>
-            <span className="blind">좋아요 수</span>
-            {likesNum}
-          </Like>
-          <Comment>
-            <span className="blind">댓글 수</span>
-            {commentsNum}
-          </Comment>
-        </LikeAndComment>
-        <InstagramLink href={itemData.instagramUrl} target="_blank">
-          Instagram 이동하기 {'>'}
-        </InstagramLink>
-      </ItemInfoWrap>
-    </PostItemWrap>
+    <PostItemContainer>
+      <PostItemItem>
+        <PostAuthorWrap to="">
+          <AuthorImage src="" alt="" />
+          <AuthorName></AuthorName>
+        </PostAuthorWrap>
+        <ItemTitle>{itemData.name}</ItemTitle>
+        <ItemImage src={setImgSrc(itemData.itemImageUrl)} alt={itemData.name} />
+        <ItemInfoWrap>
+          <LikeAndComment>
+            <Like isLiked={isLiked} onClick={toggleLike}>
+              <span className="blind">좋아요 수</span>
+              {likesNum}
+            </Like>
+            <Comment>
+              <span className="blind">댓글 수</span>
+              {commentsNum}
+            </Comment>
+          </LikeAndComment>
+          <InstagramLink href={itemData.instagramUrl} target="_blank">
+            Instagram 이동하기 {'>'}
+          </InstagramLink>
+        </ItemInfoWrap>
+      </PostItemItem>
+    </PostItemContainer>
   ) : (
     <ItemLoading />
   );
 }
+const PostItemContainer = styled.section`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+`;
 
-const PostItemWrap = styled.section`
+const PostItemItem = styled.div`
   display: flex;
   flex-direction: column;
   padding: 80px 2.5vw 10px;
-  // max-width: 95vw;
-  // padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const PostAuthorWrap = styled(Link)`
@@ -105,7 +94,6 @@ const ItemTitle = styled.h2`
 const ItemImage = styled.img`
   position: relative;
   width: 100%;
-  height: 250px;
   object-fit: cover;
   margin-bottom: 10px;
   border-radius: 5px;

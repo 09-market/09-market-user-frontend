@@ -24,15 +24,24 @@ export default function CommentsData() {
     <CommentsWrap>
       <CommentsList>
         {commentsData.map((item) => (
-          <CommentsItem key={item.id}>{item.content}</CommentsItem>
+          <CommentItem key={item.id}>
+            <UserInfoWrap></UserInfoWrap>
+            <CommentContent>{item.content}</CommentContent>
+          </CommentItem>
         ))}
       </CommentsList>
     </CommentsWrap>
   );
 }
 
-const CommentsWrap = styled.section``;
+const CommentsWrap = styled.section`
+  padding: 15px 15px 150px;
+`;
 
 const CommentsList = styled.ul``;
 
-const CommentsItem = styled.li``;
+const CommentItem = styled.li``;
+
+const UserInfoWrap = styled.div``;
+
+const CommentContent = styled.p``;

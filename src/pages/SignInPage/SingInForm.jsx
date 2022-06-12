@@ -37,7 +37,6 @@ export default function SingInForm() {
     await axios
       .post('/auth/signin', data)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('userId', res.data.userId);
         navigate('/');

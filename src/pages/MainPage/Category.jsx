@@ -45,6 +45,10 @@ const CategoryContainer = styled.ul`
   max-width: 90vw;
   height: 50px;
   margin: 0 auto;
+
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+  }
 `;
 
 const CategoryItem = styled.li`

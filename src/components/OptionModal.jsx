@@ -3,30 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
-import axios from '../api/axios';
 
 export default function OptionModal({ optionClicked, setOptionClicked }) {
   const navigate = useNavigate();
+
   const logOut = () => {
     localStorage.clear();
     navigate('/signin');
   };
-
-  // const logOut = async (userData) => {
-  //   const userToken = localStorage.getItem('token');
-
-  //   axios
-  //     .post('/auth/logout', {
-  //       headers: { Authorization: `Bearer ${userToken}` },
-  //     })
-  //     .then(() => {
-  //       localStorage.clear();
-  //       navigate('/signin');
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   return (
     <>
@@ -34,9 +18,9 @@ export default function OptionModal({ optionClicked, setOptionClicked }) {
         optionClicked
         onClick={() => setOptionClicked(!optionClicked)}
       >
-        <ModalItem>
+        {/* <ModalItem>
           <Link to={`/profile/modify`}>회원정보 수정</Link>
-        </ModalItem>
+        </ModalItem> */}
         <ModalItem>
           <LogOutBtn type="button" onClick={logOut}>
             로그아웃

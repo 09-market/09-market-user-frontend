@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { PALLETS } from 'utils/constants';
 
 export default function Nav() {
-  const userId = localStorage.getItem('id');
+  const userId = localStorage.getItem('userId');
 
   return (
     <NavWrap>
@@ -21,7 +21,7 @@ export default function Nav() {
           </Link>
         </NavItem>
         <NavItem>
-          <Link to={`/profile/detail`} className="link-profile">
+          <Link to={`/profile/detail/${userId}`} className="link-profile">
             <span className="blind">프로필 페이지로 이동</span>
           </Link>
         </NavItem>

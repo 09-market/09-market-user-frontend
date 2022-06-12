@@ -74,6 +74,7 @@ const Form = styled.form`
   width: 100vw;
   height: 4rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: ${PALLETS.WHITE};
 `;
 
 const Label = styled.label``;

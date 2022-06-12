@@ -68,6 +68,10 @@ const HeaderItems = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+  }
 `;
 
 const Logo = styled.h1`
