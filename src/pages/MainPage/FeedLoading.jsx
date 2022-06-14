@@ -16,12 +16,13 @@ const Skeleton = styled.div`
   position: relative;
   width: 95vw;
   height: 250px;
-  margin: 2.5vw auto 0;
+  margin: 3vw auto 0;
   border-radius: 5px;
   background-color: ${PALLETS.LIGHT_GRAY};
 
   @media screen and (min-width: 420px) {
     height: 500px;
+    max-width: 70vw;
   }
 
   @keyframes loading {
