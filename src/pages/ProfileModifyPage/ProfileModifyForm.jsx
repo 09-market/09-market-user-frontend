@@ -109,7 +109,7 @@ export default function ProfileModifyForm() {
     };
 
     await axios
-      .put(`/user/${userId}`, data)
+      .put(`/auth/${userId}/update`, data)
       .then((res) => {
         console.log(res);
         navigate('/signin');
