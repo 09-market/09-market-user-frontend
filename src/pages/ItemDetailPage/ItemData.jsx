@@ -72,6 +72,11 @@ const PostItemItem = styled.div`
   display: flex;
   flex-direction: column;
   padding: 80px 2.5vw 10px;
+
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+    margin: 0 auto;
+  }
 `;
 
 const PostAuthorWrap = styled(Link)`
@@ -95,7 +100,7 @@ const ItemImage = styled.img`
   position: relative;
   width: 100%;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-radius: 5px;
 
   @media screen and (min-width: 420px) {

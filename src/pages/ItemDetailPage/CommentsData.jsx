@@ -12,7 +12,10 @@ export default function CommentsData() {
   const getComments = useCallback(async () => {
     await axios
       .get(`/item/detail/${itemId}`)
-      .then((res) => setCommentsData(res.data.comments.reverse()))
+      .then((res) => {
+        console.log(res.data.comments.reverse());
+        setCommentsData(res.data.comments.reverse());
+      })
       .catch((err) => console.log(err));
   }, [itemId]);
 
@@ -24,7 +27,7 @@ export default function CommentsData() {
     <CommentsWrap>
       <CommentsList>
         {commentsData.map((item) => (
-          <CommentItem key={item.id}>
+          <CommentItem key={item.itemId}>
             <UserInfoWrap></UserInfoWrap>
             <CommentContent>{item.content}</CommentContent>
           </CommentItem>
@@ -38,7 +41,12 @@ const CommentsWrap = styled.section`
   padding: 15px 15px 150px;
 `;
 
-const CommentsList = styled.ul``;
+const CommentsList = styled.ul`
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+    margin: 0 auto;
+  }
+`;
 
 const CommentItem = styled.li``;
 

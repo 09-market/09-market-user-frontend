@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PALLETS } from 'utils/constants';
 
-export default function OptionModal({ optionClicked, setOptionClicked }) {
+export default function OptionModal({ optionClicked, setOptionClicked, mode }) {
   const navigate = useNavigate();
 
   const logOut = () => {
@@ -12,25 +12,50 @@ export default function OptionModal({ optionClicked, setOptionClicked }) {
     navigate('/signin');
   };
 
+  const ProfileImgModify = () => {};
+
+  const optionItems = (modalMode) => {
+    switch (modalMode) {
+      case 'logout':
+        return (
+          <ModalItem>
+            <LogOutBtn type="button" onClick={logOut}>
+              로그아웃
+            </LogOutBtn>
+          </ModalItem>
+        );
+      case 'profileImgModify':
+        return (
+          <ModalItem>
+            <ProfileImgModifyBtn type="button" onClick={ProfileImgModify}>
+              이미지 변경
+            </ProfileImgModifyBtn>
+          </ModalItem>
+        );
+      default:
+        break;
+    }
+  };
+
   return (
-    <>
+    <ModalWrap>
       <ModalContainer
         optionClicked
         onClick={() => setOptionClicked(!optionClicked)}
       >
-        {/* <ModalItem>
-          <Link to={`/profile/modify`}>회원정보 수정</Link>
-        </ModalItem> */}
-        <ModalItem>
-          <LogOutBtn type="button" onClick={logOut}>
-            로그아웃
-          </LogOutBtn>
-        </ModalItem>
+        {optionItems(mode)}
       </ModalContainer>
       <BackGround onClick={() => setOptionClicked(false)} />
-    </>
+    </ModalWrap>
   );
 }
+
+const ModalWrap = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+`;
 
 const ModalContainer = styled.ul`
   display: ${(props) => (props.profileClicked ? 'block' : 'none')};
@@ -73,8 +98,10 @@ const LogOutBtn = styled.button`
   color: ${PALLETS.BLACK};
 `;
 
+const ProfileImgModifyBtn = styled(LogOutBtn)``;
+
 const BackGround = styled.div`
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 100vw;
   height: 100vh;
   position: fixed;

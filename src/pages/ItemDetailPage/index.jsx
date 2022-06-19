@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import GoBackHeader from 'components/GoBackHeader';
 import ItemData from './ItemData';
@@ -9,11 +10,13 @@ export default function ItemDetailPage() {
   return (
     <>
       <GoBackHeader headerTitle="상품" />
-      <main>
+      <ItemDetailWrap>
         <ItemData />
         <CommentsData />
         <InputComment />
-      </main>
+      </ItemDetailWrap>
     </>
   );
 }
+
+const ItemDetailWrap = styled.main``;

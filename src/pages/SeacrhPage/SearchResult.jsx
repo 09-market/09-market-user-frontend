@@ -64,12 +64,17 @@ const PostsWrap = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (min-width: 420px) {
+    max-width: 70vw;
+    margin: 0 auto;
+  }
 `;
 
 const PostItem = styled.li`
   cursor: pointer;
   position: relative;
-  width: 95vw;
+  width: 95%;
   margin-top: 3vw;
 `;
 

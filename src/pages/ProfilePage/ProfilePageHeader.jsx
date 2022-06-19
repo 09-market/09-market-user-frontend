@@ -10,6 +10,14 @@ export default function ProfilePageHeader() {
 
   return (
     <>
+      {optionClicked && (
+        <OptionModal
+          optionClicked={optionClicked}
+          setOptionClicked={setOptionClicked}
+          mode={'logout'}
+        />
+      )}
+
       <ProfilePageHeaderWrap>
         <OptionButton
           type="button"
@@ -18,12 +26,6 @@ export default function ProfilePageHeader() {
           <span className="blind">옵션 버튼</span>
         </OptionButton>
       </ProfilePageHeaderWrap>
-      {optionClicked && (
-        <OptionModal
-          optionClicked={optionClicked}
-          setOptionClicked={setOptionClicked}
-        />
-      )}
     </>
   );
 }

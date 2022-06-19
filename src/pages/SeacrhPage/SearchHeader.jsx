@@ -48,6 +48,8 @@ const SearchHeaderWrap = styled.header`
   width: 100%;
   background-color: ${PALLETS.PURPLE};
   color: ${PALLETS.WHITE};
+
+  z-index: 9999;
 `;
 
 const SearchHeaderItems = styled.div`

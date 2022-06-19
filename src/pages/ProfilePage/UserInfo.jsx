@@ -5,6 +5,7 @@ import axios from '../../api/axios';
 
 import Loading from 'components/Loading';
 import { setImgSrc } from 'utils/setImgSrc';
+import OptionModal from 'components/OptionModal';
 
 export default function UserInfo() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function UserInfo() {
   const [userName, setUserName] = useState('');
   const [userImg, setUserImg] = useState('');
   const [userInfo, setUserInfo] = useState('');
+  const [profileImgModify, setProfileImgModify] = useState(false);
 
   const getUserProfile = useCallback(
     async (profileUserId) => {
@@ -58,6 +60,7 @@ export default function UserInfo() {
           <UserProfileImg
             src={profileImgSrc(userImg)}
             alt={`${userName} 프로필 이미지`}
+            onClick={() => setProfileImgModify(true)}
           />
           <UserNameAndModify>
             <UserName>
@@ -70,6 +73,13 @@ export default function UserInfo() {
           </UserNameAndModify>
         </UserInfoHeader>
         {/* <UserInfo */}
+        {profileImgModify && (
+          <OptionModal
+            optionClicked={profileImgModify}
+            setOptionClicked={setProfileImgModify}
+            mode={'profileImgModify'}
+          />
+        )}
       </UserInfoWrap>
     );
   } else {
@@ -102,6 +112,13 @@ const UserProfileImg = styled.img`
   width: 77px;
   height: 77px;
   margin-right: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+
+  @media screen and (min-width: 420px) {
+    width: 150px;
+    height: 150px;
+  }
 `;
 
 const UserNameAndModify = styled.div`
